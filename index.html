@@ -375,7 +375,192 @@
             font-size: 15px;
         }
 
-        /* أنماط الهيرو */
+        /* ============================================= */
+        /* تحسينات الهيدر للهواتف - عرض عمودي */
+        /* ============================================= */
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: nowrap;
+                gap: 12px;
+                justify-content: space-between;
+                overflow-x: auto;
+                overflow-y: hidden;
+                padding-bottom: 8px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            .header-content::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                flex-shrink: 0;
+            }
+            
+            .logo {
+                flex-shrink: 0;
+                justify-content: flex-start;
+                min-width: auto;
+                flex: 0 0 auto;
+            }
+            
+            .header-controls {
+                flex-shrink: 0;
+                width: auto;
+                justify-content: flex-end;
+                margin-top: 0;
+                flex: 0 0 auto;
+            }
+            
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--header-bg);
+                border-bottom: 1px solid var(--border-color);
+                padding: 20px;
+                display: none;
+                z-index: 1001;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+            }
+            
+            nav.active {
+                display: block;
+                animation: slideDown 0.3s ease;
+            }
+            
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+            
+            nav ul li a {
+                padding: 14px 18px;
+                border-radius: 8px;
+                justify-content: flex-start;
+                font-size: 16px;
+            }
+            
+            .auth-buttons {
+                width: auto;
+                justify-content: flex-end;
+            }
+            
+            .header-btn {
+                flex: 0 0 auto;
+                justify-content: center;
+                min-width: 0;
+                font-size: 13px;
+                padding: 10px 12px;
+            }
+            
+            .language-btn span, .theme-toggle span {
+                display: none;
+            }
+            
+            .language-btn, .theme-toggle {
+                padding: 10px;
+                min-width: 44px;
+                justify-content: center;
+            }
+            
+            .user-info {
+                flex-direction: row;
+                gap: 10px;
+                width: auto;
+            }
+            
+            .user-info button {
+                width: auto;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                gap: 8px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+            
+            .header-btn {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            
+            .auth-buttons {
+                gap: 6px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .header-content {
+                gap: 6px;
+            }
+            
+            .logo {
+                font-size: 18px;
+            }
+            
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+            
+            .header-btn {
+                padding: 8px;
+                font-size: 11px;
+            }
+            
+            .auth-buttons {
+                flex-direction: row;
+                gap: 4px;
+            }
+            
+            .language-selector, .theme-toggle {
+                width: auto;
+            }
+            
+            .language-btn, .theme-toggle {
+                width: 40px;
+                height: 40px;
+                justify-content: center;
+            }
+            
+            .header-controls {
+                gap: 6px;
+            }
+        }
+
+        /* بقية الأنماط تبقى كما هي */
         .hero {
             background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             border-bottom: 1px solid var(--border-color);
@@ -715,74 +900,6 @@
         }
 
         @media (max-width: 768px) {
-            .header-content {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-                order: 1;
-            }
-            
-            .logo {
-                order: 2;
-                flex: 1;
-                justify-content: center;
-                min-width: 0;
-            }
-            
-            .header-controls {
-                order: 3;
-                width: 100%;
-                justify-content: space-between;
-                margin-top: 8px;
-            }
-            
-            nav {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--header-bg);
-                border-bottom: 1px solid var(--border-color);
-                padding: 20px;
-                display: none;
-                z-index: 1001;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-            }
-            
-            nav.active {
-                display: block;
-                animation: slideDown 0.3s ease;
-            }
-            
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 8px;
-                width: 100%;
-            }
-            
-            nav ul li a {
-                padding: 14px 18px;
-                border-radius: 8px;
-                justify-content: flex-start;
-                font-size: 16px;
-            }
-            
             .hero {
                 padding: 100px 0;
             }
@@ -809,49 +926,12 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            
-            .auth-buttons {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .header-btn {
-                flex: 1;
-                justify-content: center;
-                min-width: 0;
-                font-size: 13px;
-                padding: 10px 12px;
-            }
-            
-            .language-btn span, .theme-toggle span {
-                display: none;
-            }
-            
-            .language-btn, .theme-toggle {
-                padding: 10px;
-                min-width: 44px;
-                justify-content: center;
-            }
         }
 
         @media (max-width: 480px) {
             .container {
                 width: 95%;
                 padding: 0 16px;
-            }
-            
-            .header-content {
-                gap: 8px;
-            }
-            
-            .logo {
-                font-size: 20px;
-            }
-            
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
             }
             
             .hero {
@@ -871,17 +951,6 @@
             .cta-button {
                 padding: 14px 32px;
                 font-size: 16px;
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .user-info {
-                flex-direction: column;
-                gap: 10px;
-                width: 100%;
-            }
-            
-            .user-info button {
                 width: 100%;
                 justify-content: center;
             }
@@ -938,28 +1007,6 @@
             
             .hero p {
                 font-size: 15px;
-            }
-            
-            .auth-buttons {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .header-btn {
-                width: 100%;
-            }
-            
-            .language-selector, .theme-toggle {
-                width: 100%;
-            }
-            
-            .language-btn, .theme-toggle {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .header-controls {
-                flex-wrap: wrap;
             }
         }
 
