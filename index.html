@@ -1,2093 +1,1564 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SportsHub - مجتمع رياضي عالمي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>3ALearning · for English</title>
+    
+    <!-- Preconnect for faster external resource loading -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    
+    <!-- Font Awesome 6 - with defer and reduced size -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    </noscript>
+    
     <style>
-        /* أنماط CSS الأساسية - الوضع الفاتح */
+        /* ----- Critical CSS (inline) ----- */
         :root {
-            --primary-color: #ffffff;
-            --secondary-color: #f8f9fa;
-            --accent-color: #238636;
-            --accent-hover: #2ea043;
-            --border-color: #e1e4e8;
-            --text-primary: #24292e;
-            --text-secondary: #586069;
-            --bg-color: #ffffff;
-            --card-bg: #ffffff;
-            --header-bg: rgba(255, 255, 255, 0.95);
-            --button-bg: #f6f8fa;
-            --button-hover: #e1e4e8;
-            --success-color: #28a745;
-            --warning-color: #ffc107;
-            --danger-color: #dc3545;
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --header-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --color-primary: #0056D2;
+            --color-primary-hover: #003d9e;
+            --color-bg: #FFFFFF;
+            --color-text: #1F1F1F;
+            --color-text-light: #5a5a5a;
+            --color-border: #e8e8e8;
+            --color-shadow: rgba(0, 0, 0, 0.05);
+            --header-height: 66px;
+            --radius: 6px;
+            --transition: 0.2s ease;
+            --max-width: 1200px;
+            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --footer-bg: #1a1a1a;
+            --footer-text: #d0d0d0;
+            --footer-heading: #ffffff;
+            --footer-border: #333333;
         }
 
-        /* الوضع الداكن */
-        .dark-mode {
-            --primary-color: #0d1117;
-            --secondary-color: #161b22;
-            --accent-color: #238636;
-            --accent-hover: #2ea043;
-            --border-color: #30363d;
-            --text-primary: #f0f6fc;
-            --text-secondary: #8b949e;
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --header-bg: rgba(13, 17, 23, 0.95);
-            --button-bg: #21262d;
-            --button-hover: #30363d;
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            --header-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        /* Prevent selection and zoom */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Allow selection on input fields for usability */
+        input, textarea, [contenteditable="true"] {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* Prevent zoom via keyboard shortcuts (touch) */
+        html {
+            touch-action: manipulation;
+        }
+
+        body {
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
         }
 
         html, body {
-            max-width: 100%;
-            overflow-x: hidden;
-            touch-action: pan-y;
-            scroll-behavior: smooth;
+            height: 100%;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        /* منع التكبير على الهواتف */
-        @media screen and (max-width: 768px) {
-            body {
-                -webkit-text-size-adjust: 100%;
-                text-size-adjust: 100%;
-            }
-            
-            input, select, textarea {
-                font-size: 16px !important;
-            }
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* تصميم الهيدر الجديد */
-        header {
-            background-color: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--header-shadow);
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .header-content {
+            font-family: var(--font-family);
+            background: #f5f7fa;
+            padding-top: var(--header-height);
+            top: 0 !important;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        /* Disable right-click context menu */
+        .app-header, .hero-section, .pricing-section, .app-footer, .mobile-nav {
+            -webkit-touch-callout: none;
+        }
+
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: 0 1px 4px var(--color-shadow);
+            z-index: 1000;
+            display: flex;
             align-items: center;
-            position: relative;
+            padding: 0 32px;
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 20px;
         }
 
-        .logo {
+        .brand-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            text-decoration: none;
+            color: var(--color-text);
             font-weight: 700;
-            font-size: 24px;
-            z-index: 1002;
-            flex-shrink: 0;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: transform 0.2s;
-        }
-
-        .logo:hover {
-            transform: scale(1.03);
-        }
-
-        .logo-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent-color), #58a6ff);
-            border-radius: 10px;
-            color: white;
-            font-size: 20px;
-        }
-
-        /* قائمة التنقل المحسنة */
-        nav {
-            transition: all 0.3s ease;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 6px;
-            background: var(--button-bg);
-            padding: 6px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        nav ul li a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            padding: 10px 18px;
-            border-radius: 8px;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 1.35rem;
+            letter-spacing: -0.3px;
             white-space: nowrap;
-        }
-
-        nav ul li a:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-1px);
-        }
-
-        nav ul li a.active {
-            background-color: var(--accent-color);
-            color: white;
-            box-shadow: 0 2px 8px rgba(35, 134, 54, 0.3);
-        }
-
-        nav ul li a i {
-            font-size: 15px;
-        }
-
-        /* عناصر التحكم في الهيدر */
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 12px;
             flex-shrink: 0;
         }
 
-        /* أزرار التحسين */
-        .header-btn {
-            background: var(--button-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            flex-shrink: 0;
+            margin: 0 8px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-light);
             font-weight: 500;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.92rem;
+            transition: color var(--transition);
             white-space: nowrap;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
         }
 
-        .header-btn:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        .search-wrapper {
+            flex: 1 1 auto;
+            max-width: 440px;
+            min-width: 160px;
+            margin: 0 12px;
         }
-
-        .header-btn.primary {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            color: white;
-        }
-
-        .header-btn.primary:hover {
-            background-color: var(--accent-hover);
-            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
-        }
-
-        /* زر القائمة المتنقلة */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 22px;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
-            transition: background-color 0.2s;
-            flex-shrink: 0;
-        }
-
-        .mobile-menu-btn:hover {
-            background-color: var(--button-hover);
-        }
-
-        /* زر تبديل الوضع */
-        .theme-toggle {
-            background: var(--button-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: all 0.2s;
-            flex-shrink: 0;
-            width: 44px;
-            height: 44px;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-1px);
-        }
-
-        /* اختيار اللغة المحسن */
-        .language-selector {
+        .search-form {
             position: relative;
-            flex-shrink: 0;
+            width: 100%;
         }
-
-        .language-btn {
-            background: var(--button-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .language-btn:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-1px);
-        }
-
-        .language-dropdown {
+        .search-icon {
             position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin-top: 6px;
-            max-height: 240px;
-            overflow-y: auto;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9aa0a8;
+            font-size: 0.9rem;
+            pointer-events: none;
         }
-
-        .language-dropdown.show {
-            display: block;
-        }
-
-        .language-option {
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-        }
-
-        .language-option:hover {
-            background-color: var(--button-hover);
-        }
-
-        .language-option i {
-            font-size: 14px;
-            opacity: 0.7;
-        }
-
-        /* أزرار المصادقة */
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        /* معلومات المستخدم */
-        .user-info {
-            display: none;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .user-avatar {
-            width: 40px;
+        .search-input {
+            width: 100%;
             height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-color), #58a6ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 16px;
-            color: white;
-            transition: transform 0.2s;
+            padding: 0 16px 0 40px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            background: #f8f9fc;
+            font-size: 0.9rem;
+            color: var(--color-text);
+            transition: all var(--transition);
+            outline: none;
+            font-family: var(--font-family);
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        .search-input::placeholder {
+            color: #9aa0a8;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .search-input:focus {
+            border-color: var(--color-primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.08);
+        }
+
+        .lang-dropdown-wrapper {
+            position: relative;
             flex-shrink: 0;
         }
 
-        .user-avatar:hover {
-            transform: scale(1.1);
-        }
-
-        .user-name {
+        .lang-selector-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8f9fc;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 5px 12px 5px 10px;
+            font-size: 0.85rem;
             font-weight: 500;
-            font-size: 15px;
+            color: var(--color-text-light);
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: var(--font-family);
+        }
+        .lang-selector-btn:hover {
+            background: #f0f2f5;
+            border-color: #d0d5dd;
+        }
+        .lang-selector-btn .flag-icon {
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+        .lang-selector-btn .chevron {
+            font-size: 0.6rem;
+            margin-left: 2px;
+            color: #9aa0a8;
+            transition: transform 0.2s ease;
+        }
+        .lang-selector-btn.open .chevron {
+            transform: rotate(180deg);
         }
 
-        /* ============================================= */
-        /* تحسينات الهيدر للهواتف - عرض عمودي */
-        /* ============================================= */
-        
-        @media (max-width: 768px) {
-            .header-content {
-                flex-wrap: nowrap;
-                gap: 12px;
-                justify-content: space-between;
-                overflow-x: auto;
-                overflow-y: hidden;
-                padding-bottom: 8px;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-            
-            .header-content::-webkit-scrollbar {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-                flex-shrink: 0;
-            }
-            
-            .logo {
-                flex-shrink: 0;
-                justify-content: flex-start;
-                min-width: auto;
-                flex: 0 0 auto;
-            }
-            
-            .header-controls {
-                flex-shrink: 0;
-                width: auto;
-                justify-content: flex-end;
-                margin-top: 0;
-                flex: 0 0 auto;
-            }
-            
-            nav {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--header-bg);
-                border-bottom: 1px solid var(--border-color);
-                padding: 20px;
-                display: none;
-                z-index: 1001;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-            }
-            
-            nav.active {
-                display: block;
-                animation: slideDown 0.3s ease;
-            }
-            
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 8px;
-                width: 100%;
-            }
-            
-            nav ul li a {
-                padding: 14px 18px;
-                border-radius: 8px;
-                justify-content: flex-start;
-                font-size: 16px;
-            }
-            
-            .auth-buttons {
-                width: auto;
-                justify-content: flex-end;
-            }
-            
-            .header-btn {
-                flex: 0 0 auto;
-                justify-content: center;
-                min-width: 0;
-                font-size: 13px;
-                padding: 10px 12px;
-            }
-            
-            .language-btn span, .theme-toggle span {
-                display: none;
-            }
-            
-            .language-btn, .theme-toggle {
-                padding: 10px;
-                min-width: 44px;
-                justify-content: center;
-            }
-            
-            .user-info {
-                flex-direction: row;
-                gap: 10px;
-                width: auto;
-            }
-            
-            .user-info button {
-                width: auto;
-                justify-content: center;
-            }
+        .lang-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 200px;
+            max-height: 380px;
+            overflow-y: auto;
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+            padding: 8px 0;
+            display: none;
+            z-index: 1100;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .lang-dropdown-menu.open {
+            display: flex;
         }
 
-        @media (max-width: 480px) {
-            .header-content {
-                gap: 8px;
-            }
-            
-            .logo {
-                font-size: 20px;
-            }
-            
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-            }
-            
-            .header-btn {
-                padding: 8px 10px;
-                font-size: 12px;
-            }
-            
-            .auth-buttons {
-                gap: 6px;
-            }
+        .lang-dropdown-menu .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: background 0.15s ease;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+            font-family: var(--font-family);
+        }
+        .lang-dropdown-menu .lang-item:hover {
+            background: #f0f5ff;
+        }
+        .lang-dropdown-menu .lang-item .lang-code {
+            font-weight: 600;
+            color: var(--color-primary);
+            min-width: 32px;
+        }
+        .lang-dropdown-menu .lang-item .lang-name {
+            color: var(--color-text-light);
+        }
+        .lang-dropdown-menu .lang-item .check-mark {
+            margin-left: auto;
+            color: var(--color-primary);
+            font-size: 0.8rem;
         }
 
-        @media (max-width: 360px) {
-            .header-content {
-                gap: 6px;
-            }
-            
-            .logo {
-                font-size: 18px;
-            }
-            
-            .logo-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-            }
-            
-            .header-btn {
-                padding: 8px;
-                font-size: 11px;
-            }
-            
-            .auth-buttons {
-                flex-direction: row;
-                gap: 4px;
-            }
-            
-            .language-selector, .theme-toggle {
-                width: auto;
-            }
-            
-            .language-btn, .theme-toggle {
-                width: 40px;
-                height: 40px;
-                justify-content: center;
-            }
-            
-            .header-controls {
-                gap: 6px;
-            }
+        #google_translate_element {
+            display: none !important;
         }
 
-        /* بقية الأنماط تبقى كما هي */
-        .hero {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            border-bottom: 1px solid var(--border-color);
-            padding: 120px 0;
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+        .login-link {
+            text-decoration: none;
+            color: var(--color-text-light);
+            font-weight: 500;
+            font-size: 0.92rem;
+            padding: 8px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            transition: all var(--transition);
+            white-space: nowrap;
+            background: transparent;
+        }
+        .login-link:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            background: #f8faff;
+        }
+        .btn-primary {
+            background: var(--color-primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            padding: 9px 22px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            white-space: nowrap;
+            line-height: 1;
+            letter-spacing: 0.2px;
+        }
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+            box-shadow: 0 2px 8px rgba(0, 86, 210, 0.25);
+        }
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .hamburger {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            font-size: 1.3rem;
+            color: var(--color-text);
+            cursor: pointer;
+            padding: 6px 12px;
+            flex-shrink: 0;
+            transition: all var(--transition);
+            background: #f8f9fc;
+        }
+        .hamburger:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            background: var(--color-bg);
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            padding: 24px 32px 32px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border-bottom: 1px solid var(--color-border);
+            gap: 14px;
+            z-index: 999;
+        }
+        .mobile-nav.open {
+            display: flex;
+        }
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .mobile-nav a:last-of-type {
+            border-bottom: none;
+        }
+        .mobile-nav a:hover {
+            color: var(--color-primary);
+        }
+        .mobile-user-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 6px;
+        }
+        .mobile-user-actions .btn-primary {
+            width: 100%;
+            justify-content: center;
+            padding: 12px;
+            border-radius: var(--radius);
+        }
+        .mobile-user-actions .login-link {
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 12px;
+            border-radius: var(--radius);
+            border: 1px solid var(--color-border);
         }
 
-        .hero::before {
+        /* ----- Hero Section ----- */
+        .hero-section {
+            background: linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 100%);
+            padding: 64px 32px 72px;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .hero-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 86, 210, 0.10);
+            color: var(--color-primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 18px;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            max-width: 780px;
+            margin: 0 auto 16px;
+        }
+
+        .hero-title .highlight {
+            color: var(--color-primary);
+            position: relative;
+        }
+
+        .hero-title .highlight::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 2px;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(35, 134, 54, 0.1), rgba(88, 166, 255, 0.1));
-            z-index: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 86, 210, 0.15);
+            border-radius: 4px;
         }
 
-        .hero-content {
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--color-text-light);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-actions .btn-primary {
+            padding: 14px 40px;
+            font-size: 1.05rem;
+            border-radius: 40px;
+        }
+
+        .hero-actions .btn-outline-hero {
+            background: transparent;
+            border: 2px solid var(--color-border);
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 12px 32px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-actions .btn-outline-hero:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: #f8faff;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .hero-stats .stat-item {
+            text-align: center;
+        }
+
+        .hero-stats .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .hero-stats .stat-label {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin-top: 2px;
+        }
+
+        /* ----- Pricing Section Styles ----- */
+        .pricing-section {
+            max-width: var(--max-width);
+            margin: 48px auto 60px;
+            padding: 0 32px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .pricing-header {
+            margin-bottom: 48px;
+        }
+
+        .pricing-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .pricing-header p {
+            font-size: 1.2rem;
+            color: var(--color-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .billing-toggle {
+            display: inline-flex;
+            background: #f0f2f5;
+            border-radius: 40px;
+            padding: 4px;
+            margin-bottom: 40px;
+            border: 1px solid var(--color-border);
+        }
+
+        .billing-toggle button {
+            background: transparent;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 32px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-family);
+        }
+
+        .billing-toggle button.active {
+            background: #ffffff;
+            color: var(--color-text);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .billing-toggle button:first-child.active {
+            color: var(--color-primary);
+        }
+
+        .save-badge {
+            display: inline-block;
+            background: #e8f0fe;
+            color: var(--color-primary);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: 20px;
+            margin-left: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 40px 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            border: 1px solid var(--color-border);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
             position: relative;
-            z-index: 1;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--color-primary);
+            box-shadow: 0 8px 24px rgba(0, 86, 210, 0.10);
+        }
+
+        .pricing-card.popular::before {
+            content: "Most Popular";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 20px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .pricing-card .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 6px;
+        }
+
+        .pricing-card .plan-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .pricing-card .price {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 4px;
+        }
+
+        .pricing-card .price .currency {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--color-text-light);
+        }
+
+        .pricing-card .price .period {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+        }
+
+        .pricing-card .price .yearly-price {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .pricing-card .price .yearly-price .highlight {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .pricing-card .billing-period {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin-bottom: 24px;
+        }
+
+        .pricing-card .features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px 0;
+            flex: 1;
+        }
+
+        .pricing-card .features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: var(--color-text);
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .pricing-card .features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card .features i {
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .pricing-card .btn-primary {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            text-align: center;
+            border-radius: var(--radius);
+        }
+
+        .pricing-card .btn-outline {
+            background: transparent;
+            border: 2px solid var(--color-border);
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 12px 0;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all var(--transition);
             width: 100%;
         }
 
-        .hero h1 {
-            font-size: 52px;
-            font-weight: 800;
-            margin-bottom: 24px;
-            background: linear-gradient(90deg, #58a6ff, var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
+        .pricing-card .btn-outline:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: #f8faff;
         }
 
-        .hero p {
-            font-size: 22px;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 40px;
+        /* ----- Footer Styles (Black) ----- */
+        .app-footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 32px 32px;
+            margin-top: auto;
+            border-top: 1px solid var(--footer-border);
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-brand .brand-logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
             line-height: 1.6;
+            color: #b0b0b0;
+            max-width: 300px;
+            margin-top: 8px;
         }
 
-        .cta-button {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 16px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .footer-social a {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            color: #d0d0d0;
+            font-size: 1.1rem;
+            transition: all 0.25s ease;
+            text-decoration: none;
         }
 
-        .cta-button:hover {
-            background-color: var(--accent-hover);
+        .footer-social a:hover {
+            background: var(--color-primary);
+            color: #ffffff;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(35, 134, 54, 0.4);
         }
 
-        /* أنماط الأقسام */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-        }
-
-        .section-title h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .section-title p {
-            color: var(--text-secondary);
-            font-size: 18px;
-        }
-
-        /* أنماط البطاقات المحسنة */
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
-            box-shadow: var(--shadow);
-        }
-
-        .card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-6px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            padding: 20px;
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(0, 0, 0, 0.02);
-        }
-
-        .card-header h3 {
-            font-size: 18px;
+        .footer-column h4 {
+            color: var(--footer-heading);
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .card-body p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-
-        .card-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* أنماط الفوتر */
-        footer {
-            background-color: var(--header-bg);
-            border-top: 1px solid var(--border-color);
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.3px;
         }
 
         .footer-column ul {
             list-style: none;
+            padding: 0;
         }
 
         .footer-column ul li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .footer-column ul li a {
-            color: var(--text-secondary);
+            color: #b0b0b0;
             text-decoration: none;
-            font-size: 15px;
-            transition: color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
         }
 
         .footer-column ul li a:hover {
-            color: var(--text-primary);
+            color: #ffffff;
         }
 
-        .social-links {
+        .footer-bottom {
+            max-width: var(--max-width);
+            margin: 40px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid var(--footer-border);
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 16px;
+            font-size: 0.85rem;
+            color: #888888;
         }
 
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: var(--button-bg);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            transition: all 0.2s;
-        }
-
-        .social-links a:hover {
-            background: var(--button-hover);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        /* أنماط إضافية للنظام التفاعلي */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 16px 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            z-index: 1001;
-            display: none;
-            max-width: 320px;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px;
-            color: var(--text-secondary);
-            grid-column: 1 / -1;
-        }
-
-        .empty-state i {
-            font-size: 64px;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
-        .filter-buttons {
+        .footer-bottom-links {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: var(--button-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .filter-btn.active {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            color: white;
-        }
-
-        .filter-btn:hover:not(.active) {
-            background-color: var(--button-hover);
-            transform: translateY(-1px);
-        }
-
-        /* تنسيقات GitHub الإضافية */
-        .repo-language-color {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .language-football { background-color: #f1e05a; }
-        .language-basketball { background-color: #3572A5; }
-        .language-tennis { background-color: #da5b0b; }
-        .language-swimming { background-color: #00add8; }
-        .language-athletics { background-color: #e34c26; }
-        .language-other { background-color: #6f42c1; }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 8px;
-            background: var(--button-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 12px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* أنماط الوسائط المتعددة - تصميم الهاتف المحسن */
-        @media (max-width: 1024px) {
-            .hero h1 {
-                font-size: 42px;
-            }
-            
-            .hero p {
-                font-size: 20px;
-            }
-            
-            .cards-container {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                padding: 100px 0;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .hero p {
-                font-size: 18px;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 20px;
-            }
-            
-            .cards-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                width: 95%;
-                padding: 0 16px;
-            }
-            
-            .hero {
-                padding: 80px 0;
-            }
-            
-            .hero h1 {
-                font-size: 28px;
-                line-height: 1.3;
-            }
-            
-            .hero p {
-                font-size: 16px;
-                line-height: 1.5;
-            }
-            
-            .cta-button {
-                padding: 14px 32px;
-                font-size: 16px;
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .section-header {
-                gap: 16px;
-            }
-            
-            .filter-buttons {
-                justify-content: center;
-            }
-            
-            .filter-btn {
-                flex: 1;
-                min-width: 0;
-                justify-content: center;
-                font-size: 13px;
-                padding: 10px 12px;
-            }
-            
-            .card {
-                border-radius: 12px;
-            }
-            
-            .card-header {
-                padding: 16px;
-            }
-            
-            .card-body {
-                padding: 16px;
-            }
-            
-            .footer-content {
-                gap: 24px;
-            }
-            
-            .footer-column h3 {
-                font-size: 17px;
-            }
-            
-            .footer-column ul li a {
-                font-size: 14px;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .hero h1 {
-                font-size: 24px;
-            }
-            
-            .hero p {
-                font-size: 15px;
-            }
-        }
-
-        /* أنماط التدوين */
-        .blog-post {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-        }
-
-        .blog-post:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .blog-header {
-            margin-bottom: 20px;
-        }
-
-        .blog-title {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .blog-meta {
-            display: flex;
-            gap: 20px;
-            color: var(--text-secondary);
-            font-size: 15px;
-            flex-wrap: wrap;
-        }
-
-        .blog-content {
-            line-height: 1.7;
-        }
-
-        .blog-content p {
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-
-        .blog-content img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .read-more {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-            transition: gap 0.2s;
-        }
-
-        .read-more:hover {
-            gap: 12px;
-        }
-        
-        /* قسم الإعلانات */
-        .ad-section {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            border-radius: 16px;
-            padding: 40px;
-            margin: 60px 0;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        
-        .ad-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(35, 134, 54, 0.1), rgba(88, 166, 255, 0.1));
-            z-index: 0;
-        }
-        
-        .ad-section > * {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .ad-section h3 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-        
-        .ad-section p {
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            font-size: 18px;
-        }
-        
-        .ad-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 24px;
-            margin-top: 40px;
-        }
-        
-        .ad-feature {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-        }
-        
-        .ad-feature:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-color);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-        
-        .ad-feature i {
-            font-size: 28px;
-            color: var(--accent-color);
-            margin-bottom: 16px;
-        }
-        
-        .ad-feature h4 {
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-        
-        .ad-feature p {
-            font-size: 15px;
-            margin-bottom: 0;
         }
 
-        /* تحسينات للهاتف في قسم الميزات */
-        @media (max-width: 768px) {
-            .ad-features {
-                grid-template-columns: 1fr;
+        .footer-bottom-links a {
+            color: #888888;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #ffffff;
+        }
+
+        /* ----- Responsive ----- */
+        @media screen and (max-width: 900px) {
+            .app-header { padding: 0 20px; }
+            .nav-links { gap: 18px; }
+            .search-wrapper { max-width: 320px; min-width: 120px; }
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+            .hero-title {
+                font-size: 2.6rem;
+            }
+            .hero-stats {
+                gap: 28px;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            :root { --header-height: 60px; }
+            .app-header { padding: 0 16px; }
+            .nav-links,
+            .user-actions .login-link,
+            .user-actions .btn-primary {
+                display: none;
+            }
+            .hamburger { display: inline-block; }
+            .search-wrapper {
+                max-width: 200px;
+                min-width: 80px;
+                margin: 0 6px;
+                flex: 1 1 120px;
+            }
+            .search-input {
+                height: 36px;
+                font-size: 0.85rem;
+                padding-left: 34px;
+            }
+            .search-icon { left: 12px; font-size: 0.8rem; }
+            .brand-logo { font-size: 1.15rem; }
+            .lang-selector-btn {
+                padding: 4px 10px 4px 8px;
+                font-size: 0.8rem;
+            }
+            .lang-selector-btn .flag-icon { font-size: 1rem; }
+            .lang-selector-btn .label-text { display: none; }
+            .lang-selector-btn .chevron { display: none; }
+            .lang-dropdown-menu {
+                min-width: 160px;
+                right: -10px;
+            }
+            .lang-dropdown-menu .lang-item {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .hero-section {
+                padding: 40px 16px 48px;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .hero-actions .btn-primary {
+                padding: 12px 28px;
+                font-size: 0.95rem;
+            }
+            .hero-actions .btn-outline-hero {
+                padding: 10px 24px;
+                font-size: 0.95rem;
+            }
+            .hero-stats {
                 gap: 20px;
             }
-            
-            .ad-feature {
-                padding: 20px;
+            .hero-stats .stat-number {
+                font-size: 1.4rem;
             }
-            
-            .ad-section {
-                padding: 30px 24px;
-                margin: 40px 0;
+
+            .pricing-section {
+                padding: 0 16px;
+                margin: 32px auto 40px;
             }
-            
-            .blog-post {
-                padding: 24px;
+            .pricing-header h2 {
+                font-size: 2.2rem;
             }
-            
-            .blog-title {
-                font-size: 22px;
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 440px;
+                margin: 0 auto;
             }
-            
-            .blog-meta {
+            .billing-toggle button {
+                padding: 6px 16px;
+                font-size: 0.8rem;
+            }
+            .app-footer {
+                padding: 40px 20px 24px;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
                 gap: 16px;
             }
         }
 
-        @media (max-width: 480px) {
-            .ad-section {
-                padding: 24px 20px;
+        @media screen and (max-width: 480px) {
+            .app-header { padding: 0 12px; }
+            .search-wrapper {
+                max-width: 140px;
+                min-width: 60px;
+                flex: 1 1 80px;
             }
-            
-            .ad-section h3 {
-                font-size: 24px;
+            .search-input {
+                font-size: 0.8rem;
+                padding-left: 30px;
+                height: 32px;
             }
-            
-            .ad-section p {
-                font-size: 16px;
+            .search-icon { left: 10px; font-size: 0.75rem; }
+            .brand-logo { font-size: 1rem; }
+            .lang-selector-btn { padding: 3px 8px; }
+            .lang-selector-btn .flag-icon { font-size: 0.9rem; }
+            .hamburger { font-size: 1.1rem; padding: 4px 10px; }
+            .lang-dropdown-menu {
+                min-width: 140px;
+                right: -5px;
+                max-height: 280px;
             }
-            
-            .blog-post {
-                padding: 20px;
+
+            .hero-title {
+                font-size: 1.6rem;
             }
-            
-            .blog-title {
-                font-size: 20px;
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
             }
-            
-            .blog-meta {
-                font-size: 14px;
+            .hero-actions .btn-primary,
+            .hero-actions .btn-outline-hero {
+                width: 100%;
+                text-align: center;
             }
+            .hero-stats {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .pricing-header h2 {
+                font-size: 1.8rem;
+            }
+            .pricing-card {
+                padding: 28px 20px;
+            }
+            .app-footer {
+                padding: 32px 16px 20px;
+            }
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        .search-input:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+        .lang-dropdown-menu::-webkit-scrollbar {
+            width: 5px;
+        }
+        .lang-dropdown-menu::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        .lang-dropdown-menu::-webkit-scrollbar-thumb {
+            background: #c0c8d0;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
-    <!-- الرأس المحسن -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
-                <a href="#home" class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-running"></i>
-                    </div>
-                    <span data-translate="site_title">SportsHub</span>
-                </a>
-                
-                <nav id="mainNav">
-                    <ul>
-                        <li><a href="#home" class="active" data-translate="nav_home"><i class="fas fa-home"></i> الرئيسية</a></li>
-                        <li><a href="#posts" data-translate="nav_posts"><i class="fas fa-newspaper"></i> المشاركات</a></li>
-                        <li><a href="#blog" data-translate="nav_blog"><i class="fas fa-blog"></i> المدونة</a></li>
-                        <li><a href="#ads" data-translate="nav_ads"><i class="fas fa-ad"></i> الإعلانات</a></li>
-                    </ul>
-                </nav>
-                
-                <div class="header-controls">
-                    <button class="theme-toggle" id="themeToggle">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    
-                    <div class="language-selector">
-                        <button class="language-btn">
-                            <i class="fas fa-globe"></i>
-                            <span id="current-language">العربية</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="language-dropdown" id="languageDropdown">
-                            <!-- سيتم إضافة اللغات ديناميكياً -->
-                        </div>
-                    </div>
-                    
-                    <div class="auth-buttons" id="authButtons">
-                        <button class="header-btn" id="loginBtn" data-translate="btn_login"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
-                        <button class="header-btn primary" id="registerBtn" data-translate="btn_register"><i class="fas fa-user-plus"></i> إنشاء حساب</button>
-                    </div>
-                    
-                    <div class="user-info" id="userInfo">
-                        <div class="user-avatar" id="userAvatar">م</div>
-                        <span class="user-name" id="userName">مستخدم</span>
-                        <button class="header-btn" id="logoutBtn" data-translate="btn_logout"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
-                    </div>
-                </div>
+
+    <header class="app-header" role="banner">
+        <div class="header-inner">
+            <a href="#" class="brand-logo" aria-label="3ALearning homepage">
+                <span>3ALearning</span>
+            </a>
+
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#">Courses</a>
+                <a href="#">Practice</a>
+                <a href="#">Grammar</a>
+                <a href="#">Test</a>
+            </nav>
+
+            <div class="search-wrapper" role="search">
+                <form class="search-form" action="#" method="get">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input
+                        class="search-input"
+                        type="search"
+                        placeholder="Search lessons..."
+                        aria-label="Search for English lessons or topics"
+                    />
+                </form>
             </div>
+
+            <div class="lang-dropdown-wrapper">
+                <button class="lang-selector-btn" id="langSelectorBtn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
+                    <span class="flag-icon"><i class="fas fa-globe"></i></span>
+                    <span class="label-text">English</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </button>
+                <div class="lang-dropdown-menu" id="langDropdownMenu" role="listbox"></div>
+            </div>
+
+            <div class="user-actions">
+                <a href="#" class="login-link">Log In</a>
+                <button class="btn-primary">Try For Free</button>
+            </div>
+
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-controls="mobileNav" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- إشعار -->
-    <div class="notification" id="notification"></div>
-
-    <!-- قسم الهيرو -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1 data-translate="hero_title">مرحباً بكم في مجتمعنا الرياضي</h1>
-                <p data-translate="hero_description">منصة شاملة لمحبي الرياضة حول العالم، يمكنك مشاركة الأخبار الرياضية، الإعلان عن الفعاليات، والتفاعل مع عشاق الرياضة من مختلف أنحاء العالم</p>
-                <button class="cta-button" id="joinBtn" data-translate="btn_join"><i class="fas fa-users"></i> انضم إلينا الآن</button>
-            </div>
+    <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+        <a href="#">Courses</a>
+        <a href="#">Practice Tools</a>
+        <a href="#">Grammar &amp; Vocab</a>
+        <a href="#">Placement Test</a>
+        <div class="mobile-user-actions">
+            <a href="#" class="login-link">Log In</a>
+            <button class="btn-primary">Start Free Trial</button>
         </div>
-    </section>
+    </div>
 
-    <!-- قسم المشاركات -->
-    <section id="posts">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title">
-                    <h2 data-translate="posts_title">المشاركات الرياضية</h2>
-                    <p data-translate="posts_description">استكشف أحدث الأخبار والمقالات والتحديثات من عالم الرياضة</p>
-                </div>
-                <div class="filter-buttons" id="postFilters">
-                    <button class="filter-btn active" data-filter="all" data-translate="filter_all"><i class="fas fa-layer-group"></i> الكل</button>
-                    <button class="filter-btn" data-filter="كرة القدم" data-translate="filter_football"><i class="fas fa-futbol"></i> كرة القدم</button>
-                    <button class="filter-btn" data-filter="كرة السلة" data-translate="filter_basketball"><i class="fas fa-basketball-ball"></i> كرة السلة</button>
-                    <button class="filter-btn" data-filter="التنس" data-translate="filter_tennis"><i class="fas fa-table-tennis"></i> التنس</button>
-                    <button class="filter-btn" data-filter="السباحة" data-translate="filter_swimming"><i class="fas fa-swimmer"></i> السباحة</button>
-                    <button class="filter-btn" data-filter="ألعاب القوى" data-translate="filter_athletics"><i class="fas fa-running"></i> ألعاب القوى</button>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-inner">
+            <div class="hero-badge">
+                <i class="fas fa-graduation-cap" style="margin-right:6px;"></i> Learn English Confidently
             </div>
-            
-            <div class="cards-container" id="postsContainer">
-                <!-- سيتم إضافة المشاركات ديناميكياً باستخدام JavaScript -->
+            <h1 class="hero-title">
+                Master English with <br /><span class="highlight">Smart &amp; Interactive</span> Lessons
+            </h1>
+            <p class="hero-subtitle">
+                Join thousands of learners worldwide. Build vocabulary, master grammar, 
+                and speak with confidence — all at your own pace.
+            </p>
+            <div class="hero-actions">
+                <button class="btn-primary">Start Free Trial <i class="fas fa-arrow-right" style="margin-left:10px;"></i></button>
+                <a href="#" class="btn-outline-hero"><i class="fas fa-play-circle" style="margin-right:8px;"></i> See How It Works</a>
             </div>
-        </div>
-    </section>
-
-    <!-- قسم المدونة -->
-    <section id="blog">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title">
-                    <h2 data-translate="blog_title">المدونة الرياضية</h2>
-                    <p data-translate="blog_description">مقالات متعمقة وتحليلات رياضية من خبراء ومحترفين</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">12K+</div>
+                    <div class="stat-label">Active Learners</div>
                 </div>
-            </div>
-            
-            <div class="blog-posts" id="blogContainer">
-                <!-- سيتم إضافة المقالات ديناميكياً باستخدام JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الإعلانات -->
-    <section id="ads">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title">
-                    <h2 data-translate="ads_title">الإعلانات الرياضية</h2>
-                    <p data-translate="ads_description">إعلانات عن المنتجات الرياضية، الفعاليات، والفرص الرياضية</p>
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Interactive Lessons</div>
                 </div>
-                <div class="filter-buttons" id="adFilters">
-                    <button class="filter-btn active" data-filter="all" data-translate="filter_all"><i class="fas fa-layer-group"></i> الكل</button>
-                    <button class="filter-btn" data-filter="منتج رياضي" data-translate="filter_products"><i class="fas fa-shopping-bag"></i> منتجات رياضية</button>
-                    <button class="filter-btn" data-filter="فعالية رياضية" data-translate="filter_events"><i class="fas fa-calendar-alt"></i> فعاليات رياضية</button>
-                    <button class="filter-btn" data-filter="فرصة تدريب" data-translate="filter_training"><i class="fas fa-dumbbell"></i> فرص تدريب</button>
-                    <button class="filter-btn" data-filter="بطولة" data-translate="filter_tournaments"><i class="fas fa-trophy"></i> بطولات</button>
-                </div>
-            </div>
-            
-            <div class="cards-container" id="adsContainer">
-                <!-- سيتم إضافة الإعلانات ديناميكياً باستخدام JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم دعوة للتفاعل -->
-    <section class="ad-section">
-        <div class="container">
-            <h3 data-translate="interaction_title">انضم إلى مجتمعنا الرياضي</h3>
-            <p data-translate="interaction_description">تفاعل مع عشاق الرياضة من حول العالم وشارك في النقاشات المثيرة</p>
-            <button class="cta-button" data-translate="btn_join_community"><i class="fas fa-user-plus"></i> انضم إلى المجتمع</button>
-            
-            <div class="ad-features">
-                <div class="ad-feature">
-                    <i class="fas fa-users"></i>
-                    <h4 data-translate="feature_community">مجتمع نشط</h4>
-                    <p data-translate="feature_community_desc">تفاعل مع الآلاف من عشاق الرياضة</p>
-                </div>
-                <div class="ad-feature">
-                    <i class="fas fa-newspaper"></i>
-                    <h4 data-translate="feature_content">محتوى حصري</h4>
-                    <p data-translate="feature_content_desc">أخبار وتحليلات رياضية حصرية</p>
-                </div>
-                <div class="ad-feature">
-                    <i class="fas fa-globe"></i>
-                    <h4 data-translate="feature_global">عالمي</h4>
-                    <p data-translate="feature_global_desc">يغطي جميع الرياضات من حول العالم</p>
-                </div>
-                <div class="ad-feature">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h4 data-translate="feature_responsive">متجاوب</h4>
-                    <p data-translate="feature_responsive_desc">يعمل على جميع الأجهزة</p>
+                <div class="stat-item">
+                    <div class="stat-number">4.9★</div>
+                    <div class="stat-label">Average Rating</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- الفوتر -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3 data-translate="site_title">SportsHub</h3>
-                    <p data-translate="footer_description">منصة شاملة تجمع عشاق الرياضة من حول العالم لمشاركة الأخبار، الإعلانات، والفعاليات الرياضية.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="pricing-header">
+            <h2>Choose Your Plan</h2>
+            <p>Start learning English today with a plan that fits your goals and budget.</p>
+        </div>
+
+        <div class="billing-toggle" role="group" aria-label="Billing period">
+            <button class="active" data-period="monthly">Monthly</button>
+            <button data-period="yearly">Yearly <span class="save-badge">Save 67%</span></button>
+        </div>
+
+        <div class="pricing-grid" id="pricingGrid">
+            <div class="pricing-card" data-plan="starter">
+                <div class="plan-name">Starter</div>
+                <div class="plan-desc">Perfect for beginners exploring English.</div>
+                <div class="price">
+                    <span class="currency">$</span><span class="amount">2</span>
+                    <span class="period">/mo</span>
+                    <span class="yearly-price">or <span class="highlight">$20</span> / year</span>
                 </div>
-                <div class="footer-column">
-                    <h3 data-translate="footer_platform">المنصة</h3>
-                    <ul>
-                        <li><a href="#home" data-translate="nav_home"><i class="fas fa-home"></i> الرئيسية</a></li>
-                        <li><a href="#posts" data-translate="nav_posts"><i class="fas fa-newspaper"></i> المشاركات</a></li>
-                        <li><a href="#blog" data-translate="nav_blog"><i class="fas fa-blog"></i> المدونة</a></li>
-                        <li><a href="#ads" data-translate="nav_ads"><i class="fas fa-ad"></i> الإعلانات</a></li>
-                    </ul>
+                <div class="billing-period">Billed monthly</div>
+                <ul class="features">
+                    <li><i class="fas fa-check-circle"></i> 20 interactive lessons</li>
+                    <li><i class="fas fa-check-circle"></i> Basic vocabulary builder</li>
+                    <li><i class="fas fa-check-circle"></i> Grammar fundamentals</li>
+                    <li><i class="fas fa-check-circle"></i> Email support</li>
+                </ul>
+                <button class="btn-outline">Get Started</button>
+            </div>
+
+            <div class="pricing-card popular" data-plan="pro">
+                <div class="plan-name">Pro</div>
+                <div class="plan-desc">For learners who want to make real progress.</div>
+                <div class="price">
+                    <span class="currency">$</span><span class="amount">4</span>
+                    <span class="period">/mo</span>
+                    <span class="yearly-price">or <span class="highlight">$40</span> / year</span>
                 </div>
-                <div class="footer-column">
-                    <h3 data-translate="footer_categories">الفئات</h3>
-                    <ul>
-                        <li><a href="#" data-translate="category_football"><i class="fas fa-futbol"></i> كرة القدم</a></li>
-                        <li><a href="#" data-translate="category_basketball"><i class="fas fa-basketball-ball"></i> كرة السلة</a></li>
-                        <li><a href="#" data-translate="category_tennis"><i class="fas fa-table-tennis"></i> التنس</a></li>
-                        <li><a href="#" data-translate="category_swimming"><i class="fas fa-swimmer"></i> السباحة</a></li>
-                        <li><a href="#" data-translate="category_athletics"><i class="fas fa-running"></i> ألعاب القوى</a></li>
-                    </ul>
+                <div class="billing-period">Billed monthly</div>
+                <ul class="features">
+                    <li><i class="fas fa-check-circle"></i> 60+ interactive lessons</li>
+                    <li><i class="fas fa-check-circle"></i> Advanced vocabulary &amp; idioms</li>
+                    <li><i class="fas fa-check-circle"></i> Speaking &amp; pronunciation practice</li>
+                    <li><i class="fas fa-check-circle"></i> Personalized study plan</li>
+                    <li><i class="fas fa-check-circle"></i> Priority email &amp; chat support</li>
+                </ul>
+                <button class="btn-primary">Start Free Trial</button>
+            </div>
+
+            <div class="pricing-card" data-plan="premium">
+                <div class="plan-name">Premium</div>
+                <div class="plan-desc">For serious learners aiming for fluency.</div>
+                <div class="price">
+                    <span class="currency">$</span><span class="amount">7</span>
+                    <span class="period">/mo</span>
+                    <span class="yearly-price">or <span class="highlight">$70</span> / year</span>
                 </div>
-                <div class="footer-column">
-                    <h3 data-translate="footer_support">الدعم</h3>
-                    <ul>
-                        <li><a href="#" data-translate="footer_help"><i class="fas fa-question-circle"></i> المساعدة</a></li>
-                        <li><a href="#" data-translate="footer_contact"><i class="fas fa-envelope"></i> الاتصال بنا</a></li>
-                        <li><a href="#" data-translate="footer_terms"><i class="fas fa-file-contract"></i> الشروط والأحكام</a></li>
-                        <li><a href="#" data-translate="footer_privacy"><i class="fas fa-shield-alt"></i> الخصوصية</a></li>
-                    </ul>
+                <div class="billing-period">Billed monthly</div>
+                <ul class="features">
+                    <li><i class="fas fa-check-circle"></i> All 100+ lessons &amp; exercises</li>
+                    <li><i class="fas fa-check-circle"></i> 1-on-1 live tutoring sessions</li>
+                    <li><i class="fas fa-check-circle"></i> Writing feedback &amp; corrections</li>
+                    <li><i class="fas fa-check-circle"></i> IELTS/TOEFL preparation</li>
+                    <li><i class="fas fa-check-circle"></i> 24/7 priority support</li>
+                </ul>
+                <button class="btn-outline">Get Started</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="#" class="brand-logo" style="color:#ffffff;">3ALearning</a>
+                <p>Learn English the smart way. Interactive lessons, personalized practice, and real progress — all in one place.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-            <div class="copyright">
-                <p data-translate="footer_copyright">© 2023 SportsHub. جميع الحقوق محفوظة.</p>
+
+            <div class="footer-column">
+                <h4>Learning</h4>
+                <ul>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Grammar Guide</a></li>
+                    <li><a href="#">Vocabulary</a></li>
+                    <li><a href="#">Practice Tests</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 3ALearning. All rights reserved.</span>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Cookies</a>
+                <a href="#">Sitemap</a>
             </div>
         </div>
     </footer>
 
+    <div id="google_translate_element"></div>
+
     <script>
-        // منع التكبير بالضغط المزدوج على الهواتف
-        document.addEventListener('touchstart', function(event) {
-            if (event.touches.length > 1) {
-                event.preventDefault();
-            }
-        });
-
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        // منع قائمة السياق
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // بيانات اللغات
-        const languages = {
-            'ar': { name: 'العربية', dir: 'rtl' },
-            'en': { name: 'English', dir: 'ltr' },
-            'es': { name: 'Español', dir: 'ltr' },
-            'fr': { name: 'Français', dir: 'ltr' },
-            'de': { name: 'Deutsch', dir: 'ltr' },
-            'zh': { name: '中文', dir: 'ltr' },
-            'ja': { name: '日本語', dir: 'ltr' },
-            'ru': { name: 'Русский', dir: 'ltr' },
-            'pt': { name: 'Português', dir: 'ltr' },
-            'hi': { name: 'हिन्दी', dir: 'ltr' }
-        };
-
-        // نصوص الترجمة
-        const translations = {
-            'ar': {
-                'site_title': 'SportsHub',
-                'nav_home': 'الرئيسية',
-                'nav_posts': 'المشاركات',
-                'nav_blog': 'المدونة',
-                'nav_ads': 'الإعلانات',
-                'btn_login': 'تسجيل الدخول',
-                'btn_register': 'إنشاء حساب',
-                'btn_logout': 'تسجيل الخروج',
-                'btn_join': 'انضم إلينا الآن',
-                'btn_join_community': 'انضم إلى المجتمع',
-                'btn_dark_mode': 'الوضع الداكن',
-                'btn_light_mode': 'الوضع الفاتح',
-                'hero_title': 'مرحباً بكم في مجتمعنا الرياضي',
-                'hero_description': 'منصة شاملة لمحبي الرياضة حول العالم، يمكنك مشاركة الأخبار الرياضية، الإعلان عن الفعاليات، والتفاعل مع عشاق الرياضة من مختلف أنحاء العالم',
-                'posts_title': 'المشاركات الرياضية',
-                'posts_description': 'استكشف أحدث الأخبار والمقالات والتحديثات من عالم الرياضة',
-                'blog_title': 'المدونة الرياضية',
-                'blog_description': 'مقالات متعمقة وتحليلات رياضية من خبراء ومحترفين',
-                'ads_title': 'الإعلانات الرياضية',
-                'ads_description': 'إعلانات عن المنتجات الرياضية، الفعاليات، والفرص الرياضية',
-                'interaction_title': 'انضم إلى مجتمعنا الرياضي',
-                'interaction_description': 'تفاعل مع عشاق الرياضة من حول العالم وشارك في النقاشات المثيرة',
-                'filter_all': 'الكل',
-                'filter_football': 'كرة القدم',
-                'filter_basketball': 'كرة السلة',
-                'filter_tennis': 'التنس',
-                'filter_swimming': 'السباحة',
-                'filter_athletics': 'ألعاب القوى',
-                'filter_products': 'منتجات رياضية',
-                'filter_events': 'فعاليات رياضية',
-                'filter_training': 'فرص تدريب',
-                'filter_tournaments': 'بطولات',
-                'category_football': 'كرة القدم',
-                'category_basketball': 'كرة السلة',
-                'category_tennis': 'التنس',
-                'category_swimming': 'السباحة',
-                'category_athletics': 'ألعاب القوى',
-                'feature_community': 'مجتمع نشط',
-                'feature_community_desc': 'تفاعل مع الآلاف من عشاق الرياضة',
-                'feature_content': 'محتوى حصري',
-                'feature_content_desc': 'أخبار وتحليلات رياضية حصرية',
-                'feature_global': 'عالمي',
-                'feature_global_desc': 'يغطي جميع الرياضات من حول العالم',
-                'feature_responsive': 'متجاوب',
-                'feature_responsive_desc': 'يعمل على جميع الأجهزة',
-                'footer_description': 'منصة شاملة تجمع عشاق الرياضة من حول العالم لمشاركة الأخبار، الإعلانات، والفعاليات الرياضية.',
-                'footer_platform': 'المنصة',
-                'footer_categories': 'الفئات',
-                'footer_support': 'الدعم',
-                'footer_help': 'المساعدة',
-                'footer_contact': 'الاتصال بنا',
-                'footer_terms': 'الشروط والأحكام',
-                'footer_privacy': 'الخصوصية',
-                'footer_copyright': '© 2023 SportsHub. جميع الحقوق محفوظة.'
-            },
-            'en': {
-                'site_title': 'SportsHub',
-                'nav_home': 'Home',
-                'nav_posts': 'Posts',
-                'nav_blog': 'Blog',
-                'nav_ads': 'Ads',
-                'btn_login': 'Login',
-                'btn_register': 'Register',
-                'btn_logout': 'Logout',
-                'btn_join': 'Join Now',
-                'btn_join_community': 'Join Community',
-                'btn_dark_mode': 'Dark Mode',
-                'btn_light_mode': 'Light Mode',
-                'hero_title': 'Welcome to Our Sports Community',
-                'hero_description': 'A comprehensive platform for sports enthusiasts around the world. Share sports news, advertise events, and interact with sports lovers from different parts of the world',
-                'posts_title': 'Sports Posts',
-                'posts_description': 'Explore the latest news, articles and updates from the world of sports',
-                'blog_title': 'Sports Blog',
-                'blog_description': 'In-depth articles and sports analysis from experts and professionals',
-                'ads_title': 'Sports Ads',
-                'ads_description': 'Ads for sports products, events, and sports opportunities',
-                'interaction_title': 'Join Our Sports Community',
-                'interaction_description': 'Interact with sports enthusiasts from around the world and participate in exciting discussions',
-                'filter_all': 'All',
-                'filter_football': 'Football',
-                'filter_basketball': 'Basketball',
-                'filter_tennis': 'Tennis',
-                'filter_swimming': 'Swimming',
-                'filter_athletics': 'Athletics',
-                'filter_products': 'Sports Products',
-                'filter_events': 'Sports Events',
-                'filter_training': 'Training Opportunities',
-                'filter_tournaments': 'Tournaments',
-                'category_football': 'Football',
-                'category_basketball': 'Basketball',
-                'category_tennis': 'Tennis',
-                'category_swimming': 'Swimming',
-                'category_athletics': 'Athletics',
-                'feature_community': 'Active Community',
-                'feature_community_desc': 'Interact with thousands of sports enthusiasts',
-                'feature_content': 'Exclusive Content',
-                'feature_content_desc': 'Exclusive sports news and analysis',
-                'feature_global': 'Global',
-                'feature_global_desc': 'Covers all sports from around the world',
-                'feature_responsive': 'Responsive',
-                'feature_responsive_desc': 'Works on all devices',
-                'footer_description': 'A comprehensive platform that brings together sports enthusiasts from around the world to share news, ads, and sports events.',
-                'footer_platform': 'Platform',
-                'footer_categories': 'Categories',
-                'footer_support': 'Support',
-                'footer_help': 'Help',
-                'footer_contact': 'Contact Us',
-                'footer_terms': 'Terms & Conditions',
-                'footer_privacy': 'Privacy',
-                'footer_copyright': '© 2023 SportsHub. All rights reserved.'
-            }
-        };
-
-        // بيانات أولية للمشاركات
-        let posts = JSON.parse(localStorage.getItem('sportsCommunityPosts')) || [
-            {
-                id: 1,
-                title: "بطولة كأس العالم 2023 تبدأ الشهر القادم",
-                content: "تنطلق بطولة كأس العالم 2023 في قطر الشهر القادم بمشاركة 32 فريقاً من حول العالم. تستعد الفرق للمنافسة على اللقب الأغلى في عالم كرة القدم.",
-                category: "كرة القدم",
-                date: "2023-10-15",
-                author: "أحمد محمد"
-            },
-            {
-                id: 2,
-                title: "تحطيم الرقم القياسي في سباق 100 متر",
-                content: "حطم العداء الجامايكي أوسين بولت الرقم القياسي العالمي في سباق 100 متر بزمن 9.58 ثانية في البطولة العالمية لألعاب القوى.",
-                category: "ألعاب القوى",
-                date: "2023-10-12",
-                author: "فاطمة علي"
-            },
-            {
-                id: 3,
-                title: "انطلاق دوري كرة السلة الأمريكي للمحترفين",
-                content: "انطلق موسم دوري كرة السلة الأمريكي للمحترفين (NBA) بمباراة مثيرة بين لوس أنجلوس ليكرز وغولدن ستايت ووريورز.",
-                category: "كرة السلة",
-                date: "2023-10-10",
-                author: "خالد عبدالله"
-            }
-        ];
-
-        // بيانات أولية للمدونة
-        const blogPosts = [
-            {
-                id: 1,
-                title: "تطور تكتيكات كرة القدم الحديثة",
-                content: "شهدت كرة القدم الحديثة تطوراً كبيراً في الأساليب التكتيكية المستخدمة من قبل المدربين. من نظام 4-4-2 التقليدي إلى أنظمة أكثر تعقيداً مثل 4-3-3 و3-5-2، أصبحت التكتيكات جزءاً أساسياً من نجاح الفرق.",
-                excerpt: "استكشف كيف تطورت التكتيكات في كرة القدم الحديثة من الأنظمة التقليدية إلى الاستراتيجيات المعقدة التي نراها اليوم...",
-                author: "د. محمد الخبير",
-                date: "2023-10-18",
-                category: "كرة القدم",
-                readTime: "5 دقائق"
-            },
-            {
-                id: 2,
-                title: "التحضير النفسي للرياضيين المحترفين",
-                content: "يعد الجانب النفسي أحد أهم العوامل المؤثرة في أداء الرياضيين المحترفين. يتناول هذا المقال أساليب التحضير النفسي والتأهيل الذهني الذي يخضع له الرياضيون لتحقيق أفضل أداء.",
-                excerpt: "اكتشف أهمية الجانب النفسي في الأداء الرياضي والطرق التي يستخدمها المحترفون للاستعداد ذهنياً للمنافسات...",
-                author: "د. سارة النفسية",
-                date: "2023-10-15",
-                category: "علم النفس الرياضي",
-                readTime: "7 دقائق"
-            },
-            {
-                id: 3,
-                title: "مستقبل الرياضات الإلكترونية في العالم العربي",
-                content: "تشهد الرياضات الإلكترونية نمواً متسارعاً في العالم العربي، مع زيادة عدد اللاعبين المحترفين والاستثمارات في هذا المجال. يتوقع الخبراء أن تصبح المنطقة العربية أحد الأسواق الرئيسية للرياضات الإلكترونية عالمياً.",
-                excerpt: "تعرف على مستقبل الرياضات الإلكترونية في العالم العربي والتحديات والفرص التي تواجه هذا القطاع الناشئ...",
-                author: "أحمد الغامدي",
-                date: "2023-10-12",
-                category: "الرياضات الإلكترونية",
-                readTime: "6 دقائق"
-            }
-        ];
-
-        // بيانات أولية للإعلانات
-        let ads = JSON.parse(localStorage.getItem('sportsCommunityAds')) || [
-            {
-                id: 1,
-                title: "عرض خاص على المعدات الرياضية",
-                description: "خصم يصل إلى 40% على جميع المعدات الرياضية في متجرنا. العرض ساري حتى نهاية الشهر.",
-                type: "منتج رياضي",
-                contact: "sportsstore@example.com",
-                date: "2023-10-14"
-            },
-            {
-                id: 2,
-                title: "بطولة تنس محلية للهواة",
-                description: "تنظم نادي التنس المحلي بطولة للهواة خلال عطلة نهاية الأسبوع. التسجيل مفتوح للجميع.",
-                type: "بطولة",
-                contact: "tennisclub@example.com",
-                date: "2023-10-11"
-            },
-            {
-                id: 3,
-                title: "دورة تدريبية في اللياقة البدنية",
-                description: "دورة متخصصة في اللياقة البدنية وتدريبات القوة للمبتدئين والمحترفين. تبدأ الدورة الأسبوع القادم.",
-                type: "فرصة تدريب",
-                contact: "+966 555 123 456",
-                date: "2023-10-09"
-            }
-        ];
-
-        // معلومات المستخدم
-        let currentUser = JSON.parse(localStorage.getItem('sportsCommunityUser')) || null;
-        let currentLanguage = localStorage.getItem('sportsCommunityLanguage') || 'ar';
-        let isDarkMode = localStorage.getItem('sportsCommunityDarkMode') === 'true';
-
-        // دالة لتبديل الوضع الداكن/الفاتح
-        function toggleDarkMode() {
-            isDarkMode = !isDarkMode;
-            localStorage.setItem('sportsCommunityDarkMode', isDarkMode);
-            
-            if (isDarkMode) {
-                document.body.classList.add('dark-mode');
-                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+        (function() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
             } else {
-                document.body.classList.remove('dark-mode');
-                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-moon"></i>';
+                init();
             }
-            
-            // تحديث النصوص بعد التبديل
-            changeLanguage(currentLanguage);
-            
-            showNotification(isDarkMode ? 'تم تفعيل الوضع الداكن' : 'تم تفعيل الوضع الفاتح', 'success');
-        }
 
-        // دالة لتغيير اللغة
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            localStorage.setItem('sportsCommunityLanguage', lang);
-            
-            // تحديث النصوص
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                }
-            });
-            
-            // تحديث اتجاه الصفحة
-            document.body.setAttribute('dir', languages[lang].dir);
-            document.documentElement.setAttribute('lang', lang);
-            
-            // تحديث اسم اللغة الحالية
-            document.getElementById('current-language').textContent = languages[lang].name;
-            
-            // إغلاق قائمة اللغات
-            document.getElementById('languageDropdown').classList.remove('show');
-            
-            showNotification(`تم تغيير اللغة إلى ${languages[lang].name}`, 'success');
-        }
-
-        // دالة لتهيئة اختيار اللغة
-        function initLanguageSelector() {
-            const dropdown = document.getElementById('languageDropdown');
-            dropdown.innerHTML = '';
-            
-            Object.entries(languages).forEach(([code, language]) => {
-                const option = document.createElement('div');
-                option.className = 'language-option';
-                option.textContent = language.name;
-                option.addEventListener('click', () => changeLanguage(code));
-                dropdown.appendChild(option);
-            });
-            
-            // إضافة حدث للزر
-            document.querySelector('.language-btn').addEventListener('click', function() {
-                dropdown.classList.toggle('show');
-            });
-            
-            // إغلاق القائمة عند النقر خارجها
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.language-selector')) {
-                    dropdown.classList.remove('show');
-                }
-            });
-        }
-
-        // دالة لعرض المشاركات
-        function displayPosts(filter = 'all') {
-            const postsContainer = document.getElementById('postsContainer');
-            postsContainer.innerHTML = '';
-            
-            const filteredPosts = filter === 'all' ? posts : posts.filter(post => post.category === filter);
-            
-            if (filteredPosts.length === 0) {
-                postsContainer.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-newspaper"></i>
-                        <h3>لا توجد مشاركات</h3>
-                        <p>لا توجد مشاركات في هذا التصنيف حالياً.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            filteredPosts.forEach(post => {
-                const languageClass = getLanguageClass(post.category);
-                const postElement = document.createElement('div');
-                postElement.className = 'card';
-                postElement.innerHTML = `
-                    <div class="card-header">
-                        <h3>
-                            <span class="repo-language-color ${languageClass}"></span>
-                            ${post.title}
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <p>${post.content}</p>
-                        <div class="card-meta">
-                            <span><i class="fas fa-user"></i> ${post.author}</span>
-                            <span><i class="fas fa-calendar"></i> ${post.date}</span>
-                            <span class="badge">${post.category}</span>
-                        </div>
-                    </div>
-                `;
-                postsContainer.appendChild(postElement);
-            });
-        }
-
-        // دالة لعرض مقالات المدونة
-        function displayBlogPosts() {
-            const blogContainer = document.getElementById('blogContainer');
-            blogContainer.innerHTML = '';
-            
-            blogPosts.forEach(post => {
-                const postElement = document.createElement('div');
-                postElement.className = 'blog-post';
-                postElement.innerHTML = `
-                    <div class="blog-header">
-                        <h2 class="blog-title">${post.title}</h2>
-                        <div class="blog-meta">
-                            <span><i class="fas fa-user"></i> ${post.author}</span>
-                            <span><i class="fas fa-calendar"></i> ${post.date}</span>
-                            <span><i class="fas fa-clock"></i> ${post.readTime}</span>
-                            <span class="badge">${post.category}</span>
-                        </div>
-                    </div>
-                    <div class="blog-content">
-                        <p>${post.excerpt}</p>
-                        <a href="#" class="read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
-                    </div>
-                `;
-                blogContainer.appendChild(postElement);
-            });
-        }
-
-        // دالة لعرض الإعلانات
-        function displayAds(filter = 'all') {
-            const adsContainer = document.getElementById('adsContainer');
-            adsContainer.innerHTML = '';
-            
-            const filteredAds = filter === 'all' ? ads : ads.filter(ad => ad.type === filter);
-            
-            if (filteredAds.length === 0) {
-                adsContainer.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-ad"></i>
-                        <h3>لا توجد إعلانات</h3>
-                        <p>لا توجد إعلانات في هذا التصنيف حالياً.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            filteredAds.forEach(ad => {
-                const adElement = document.createElement('div');
-                adElement.className = 'card';
-                adElement.innerHTML = `
-                    <div class="card-header">
-                        <h3>
-                            <i class="fas fa-tag"></i>
-                            ${ad.title}
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <p>${ad.description}</p>
-                        <div class="card-meta">
-                            <span><i class="fas fa-calendar"></i> ${ad.date}</span>
-                            <span class="badge">${ad.type}</span>
-                        </div>
-                        <p style="margin-top: 10px; font-size: 12px;"><strong>للتواصل:</strong> ${ad.contact}</p>
-                    </div>
-                `;
-                adsContainer.appendChild(adElement);
-            });
-        }
-
-        // دالة للحصول على فئة اللغة للتصنيف
-        function getLanguageClass(category) {
-            const languageMap = {
-                'كرة القدم': 'language-football',
-                'كرة السلة': 'language-basketball',
-                'التنس': 'language-tennis',
-                'السباحة': 'language-swimming',
-                'ألعاب القوى': 'language-athletics',
-                'رياضات أخرى': 'language-other'
-            };
-            return languageMap[category] || 'language-other';
-        }
-
-        // دالة لتسجيل الدخول
-        function login() {
-            const userName = prompt('أدخل اسم المستخدم:');
-            if (userName) {
-                currentUser = {
-                    name: userName,
-                    avatar: userName.charAt(0)
-                };
-                localStorage.setItem('sportsCommunityUser', JSON.stringify(currentUser));
-                updateUserInterface();
-                showNotification(`مرحباً ${userName}!`, 'success');
-            }
-        }
-
-        // دالة لتسجيل الخروج
-        function logout() {
-            currentUser = null;
-            localStorage.removeItem('sportsCommunityUser');
-            updateUserInterface();
-            showNotification('تم تسجيل الخروج بنجاح', 'info');
-        }
-
-        // دالة لتسجيل مستخدم جديد
-        function register() {
-            const userName = prompt('أدخل اسم المستخدم الجديد:');
-            if (userName) {
-                currentUser = {
-                    name: userName,
-                    avatar: userName.charAt(0)
-                };
-                localStorage.setItem('sportsCommunityUser', JSON.stringify(currentUser));
-                updateUserInterface();
-                showNotification(`تم إنشاء حساب جديد ومرحباً ${userName}!`, 'success');
-            }
-        }
-
-        // دالة لتحديث واجهة المستخدم بناءً على حالة تسجيل الدخول
-        function updateUserInterface() {
-            const authButtons = document.getElementById('authButtons');
-            const userInfo = document.getElementById('userInfo');
-            const userAvatar = document.getElementById('userAvatar');
-            const userName = document.getElementById('userName');
-            
-            if (currentUser) {
-                authButtons.style.display = 'none';
-                userInfo.style.display = 'flex';
-                userAvatar.textContent = currentUser.avatar;
-                userName.textContent = currentUser.name;
-            } else {
-                authButtons.style.display = 'flex';
-                userInfo.style.display = 'none';
-            }
-        }
-
-        // دالة لعرض الإشعارات
-        function showNotification(message, type = 'info') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.style.display = 'block';
-            
-            // تحديد لون الإشعار بناءً على النوع
-            switch(type) {
-                case 'success':
-                    notification.style.borderLeft = '4px solid var(--success-color)';
-                    break;
-                case 'warning':
-                    notification.style.borderLeft = '4px solid var(--warning-color)';
-                    break;
-                case 'danger':
-                    notification.style.borderLeft = '4px solid var(--danger-color)';
-                    break;
-                default:
-                    notification.style.borderLeft = '4px solid var(--accent-color)';
-            }
-            
-            // إخفاء الإشعار بعد 3 ثوانٍ
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
-        }
-
-        // إضافة وظيفة القائمة المتنقلة
-        function initMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mainNav = document.getElementById('mainNav');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                mainNav.classList.toggle('active');
-                // تغيير الأيقونة
-                const icon = mobileMenuBtn.querySelector('i');
-                if (mainNav.classList.contains('active')) {
-                    icon.className = 'fas fa-times';
-                } else {
-                    icon.className = 'fas fa-bars';
-                }
-            });
-            
-            // إغلاق القائمة عند النقر على رابط
-            const navLinks = mainNav.querySelectorAll('a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mainNav.classList.remove('active');
-                    mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+            function init() {
+                // Disable right-click context menu on the whole page
+                document.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                    return false;
                 });
-            });
-            
-            // إغلاق القائمة عند النقر خارجها
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('nav') && !e.target.closest('.mobile-menu-btn')) {
-                    mainNav.classList.remove('active');
-                    mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
-                }
-            });
-            
-            // منع إغلاق القائمة عند النقر داخلها
-            mainNav.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-        }
 
-        // إضافة تأثير التنقل النشط
-        function initActiveNavigation() {
-            const navLinks = document.querySelectorAll('nav a');
-            
-            // تعيين الرابط النشط بناءً على القسم الظاهر
-            function setActiveLink() {
-                const scrollPos = window.scrollY;
-                
-                document.querySelectorAll('section').forEach(section => {
-                    const sectionTop = section.offsetTop - 100;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-                    const sectionId = section.getAttribute('id');
-                    
-                    if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${sectionId}`) {
-                                link.classList.add('active');
-                            }
-                        });
+                // Disable keyboard shortcuts for copy/paste/select all
+                document.addEventListener('keydown', function(e) {
+                    // Ctrl+C, Ctrl+V, Ctrl+A, Ctrl+U (view source), Ctrl+S (save)
+                    if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'a' || e.key === 'u' || e.key === 's')) {
+                        e.preventDefault();
+                        return false;
+                    }
+                    // F12 (DevTools)
+                    if (e.key === 'F12') {
+                        e.preventDefault();
+                        return false;
+                    }
+                    // Ctrl+Shift+I (DevTools), Ctrl+Shift+J (Console), Ctrl+Shift+C (Inspector)
+                    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+                        e.preventDefault();
+                        return false;
                     }
                 });
-            }
-            
-            // استدعاء الدالة عند التمرير
-            window.addEventListener('scroll', setActiveLink);
-            
-            // تعيين الرابط النشط عند النقر
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-            
-            // تهيئة الرابط النشط عند التحميل
-            setActiveLink();
-        }
 
-        // تهيئة الموقع عند التحميل
-        document.addEventListener('DOMContentLoaded', function() {
-            // تطبيق الوضع المظلم إذا كان مفعل
-            if (isDarkMode) {
-                document.body.classList.add('dark-mode');
-                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+                // Billing Toggle Logic
+                const toggleBtns = document.querySelectorAll('.billing-toggle button');
+                const pricingCards = document.querySelectorAll('.pricing-card');
+                
+                const prices = {
+                    starter: { monthly: 2, yearly: 20 },
+                    pro: { monthly: 4, yearly: 40 },
+                    premium: { monthly: 7, yearly: 70 }
+                };
+
+                function updatePrices(period) {
+                    toggleBtns.forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.period === period);
+                    });
+
+                    pricingCards.forEach(card => {
+                        const plan = card.dataset.plan;
+                        const priceData = prices[plan];
+                        if (!priceData) return;
+
+                        const amountEl = card.querySelector('.amount');
+                        const periodEl = card.querySelector('.period');
+                        const yearlyPriceEl = card.querySelector('.yearly-price');
+                        const billingPeriodEl = card.querySelector('.billing-period');
+
+                        if (period === 'monthly') {
+                            amountEl.textContent = priceData.monthly;
+                            periodEl.textContent = '/mo';
+                            yearlyPriceEl.style.display = 'block';
+                            billingPeriodEl.textContent = 'Billed monthly';
+                            yearlyPriceEl.innerHTML = `or <span class="highlight">$${priceData.yearly}</span> / year`;
+                        } else {
+                            amountEl.textContent = priceData.yearly;
+                            periodEl.textContent = '/year';
+                            yearlyPriceEl.style.display = 'none';
+                            billingPeriodEl.textContent = 'Billed annually';
+                        }
+                    });
+                }
+
+                toggleBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        updatePrices(this.dataset.period);
+                    });
+                });
+
+                // Mobile Hamburger
+                const hamburger = document.getElementById('hamburgerBtn');
+                const mobileNav = document.getElementById('mobileNav');
+
+                if (hamburger && mobileNav) {
+                    function toggleMobile() {
+                        const isOpen = mobileNav.classList.toggle('open');
+                        hamburger.setAttribute('aria-expanded', isOpen);
+                        const icon = hamburger.querySelector('i');
+                        icon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+                    }
+                    hamburger.addEventListener('click', toggleMobile);
+
+                    mobileNav.querySelectorAll('a, button').forEach(el => {
+                        el.addEventListener('click', function() {
+                            if (mobileNav.classList.contains('open')) {
+                                mobileNav.classList.remove('open');
+                                hamburger.setAttribute('aria-expanded', 'false');
+                                hamburger.querySelector('i').className = 'fas fa-bars';
+                            }
+                        });
+                    });
+
+                    document.addEventListener('click', function(e) {
+                        const header = document.querySelector('.app-header');
+                        if (mobileNav.classList.contains('open') &&
+                            !header.contains(e.target) &&
+                            !mobileNav.contains(e.target)) {
+                            mobileNav.classList.remove('open');
+                            hamburger.setAttribute('aria-expanded', 'false');
+                            hamburger.querySelector('i').className = 'fas fa-bars';
+                        }
+                    });
+                }
+
+                // Language Data
+                const languages = [
+                    {code:'en',name:'English'},{code:'es',name:'Español'},{code:'fr',name:'Français'},
+                    {code:'de',name:'Deutsch'},{code:'it',name:'Italiano'},{code:'pt',name:'Português'},
+                    {code:'ru',name:'Русский'},{code:'ja',name:'日本語'},{code:'ko',name:'한국어'},
+                    {code:'zh-CN',name:'中文 (简体)'},{code:'zh-TW',name:'中文 (繁體)'},{code:'ar',name:'العربية'},
+                    {code:'hi',name:'हिन्दी'},{code:'bn',name:'বাংলা'},{code:'pa',name:'ਪੰਜਾਬੀ'},
+                    {code:'ta',name:'தமிழ்'},{code:'te',name:'తెలుగు'},{code:'ml',name:'മലയാളം'},
+                    {code:'ur',name:'اردو'},{code:'fa',name:'فارسی'},{code:'tr',name:'Türkçe'},
+                    {code:'vi',name:'Tiếng Việt'},{code:'th',name:'ไทย'},{code:'id',name:'Bahasa Indonesia'},
+                    {code:'ms',name:'Bahasa Melayu'},{code:'fil',name:'Filipino'},{code:'pl',name:'Polski'},
+                    {code:'uk',name:'Українська'},{code:'ro',name:'Română'},{code:'nl',name:'Nederlands'},
+                    {code:'el',name:'Ελληνικά'},{code:'hu',name:'Magyar'},{code:'sv',name:'Svenska'},
+                    {code:'da',name:'Dansk'},{code:'fi',name:'Suomi'},{code:'no',name:'Norsk'},
+                    {code:'cs',name:'Čeština'},{code:'sk',name:'Slovenčina'},{code:'bg',name:'Български'},
+                    {code:'hr',name:'Hrvatski'},{code:'sr',name:'Српски'},{code:'sl',name:'Slovenščina'},
+                    {code:'lt',name:'Lietuvių'},{code:'lv',name:'Latviešu'},{code:'et',name:'Eesti'},
+                    {code:'he',name:'עברית'},{code:'af',name:'Afrikaans'},{code:'sw',name:'Kiswahili'},
+                    {code:'am',name:'አማርኛ'},{code:'ne',name:'नेपाली'},{code:'si',name:'සිංහල'},
+                    {code:'km',name:'ខ្មែរ'},{code:'lo',name:'ລາວ'},{code:'my',name:'မြန်မာ'},
+                    {code:'ka',name:'ქართული'},{code:'hy',name:'Հայերեն'},{code:'az',name:'Azərbaycanca'},
+                    {code:'be',name:'Беларуская'},{code:'eu',name:'Euskara'},{code:'gl',name:'Galego'},
+                    {code:'ca',name:'Català'},{code:'cy',name:'Cymraeg'},{code:'ga',name:'Gaeilge'},
+                    {code:'gd',name:'Gàidhlig'},{code:'is',name:'Íslenska'},{code:'mt',name:'Malti'},
+                    {code:'sq',name:'Shqip'},{code:'mk',name:'Македонски'},{code:'bs',name:'Bosanski'},
+                    {code:'uz',name:'Oʻzbekcha'},{code:'kk',name:'Қазақша'},{code:'ky',name:'Кыргызча'},
+                    {code:'tg',name:'Тоҷикӣ'},{code:'tk',name:'Türkmençe'},{code:'mn',name:'Монгол'},
+                    {code:'ps',name:'پښتو'},{code:'sd',name:'سنڌي'},{code:'gu',name:'ગુજરાતી'},
+                    {code:'or',name:'ଓଡ଼ିଆ'},{code:'mr',name:'मराठी'},{code:'mai',name:'मैथिली'},
+                    {code:'su',name:'Basa Sunda'},{code:'jv',name:'Basa Jawa'},{code:'ceb',name:'Cebuano'},
+                    {code:'ny',name:'ChiChewa'},{code:'st',name:'Sesotho'},{code:'xh',name:'isiXhosa'},
+                    {code:'zu',name:'isiZulu'},{code:'yo',name:'Yorùbá'},{code:'ig',name:'Igbo'},
+                    {code:'ha',name:'Hausa'}
+                ];
+
+                languages.sort((a, b) => a.name.localeCompare(b.name));
+
+                let currentLang = 'en';
+                const dropdownMenu = document.getElementById('langDropdownMenu');
+                const langBtn = document.getElementById('langSelectorBtn');
+                const labelText = langBtn.querySelector('.label-text');
+
+                function renderDropdown() {
+                    dropdownMenu.innerHTML = '';
+                    languages.forEach(lang => {
+                        const item = document.createElement('button');
+                        item.className = 'lang-item';
+                        item.setAttribute('role', 'option');
+                        item.setAttribute('data-lang', lang.code);
+                        item.innerHTML = `
+                            <span class="lang-code">${lang.code}</span>
+                            <span class="lang-name">${lang.name}</span>
+                            ${lang.code === currentLang ? '<i class="fas fa-check check-mark"></i>' : ''}
+                        `;
+                        item.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const code = this.getAttribute('data-lang');
+                            selectLanguage(code);
+                            closeDropdown();
+                        });
+                        dropdownMenu.appendChild(item);
+                    });
+                }
+
+                let translateReady = false;
+
+                function selectLanguage(langCode) {
+                    currentLang = langCode;
+                    renderDropdown();
+
+                    const found = languages.find(l => l.code === langCode);
+                    if (found) {
+                        labelText.textContent = found.name;
+                    }
+
+                    if (translateReady && typeof google !== 'undefined' && google.translate) {
+                        const select = document.querySelector('.goog-te-combo');
+                        if (select) {
+                            select.value = langCode;
+                            select.dispatchEvent(new Event('change'));
+                        }
+                    } else {
+                        window._pendingLang = langCode;
+                    }
+                }
+
+                let translateLoaded = false;
+
+                window.googleTranslateElementInit = function() {
+                    if (translateLoaded) return;
+                    translateLoaded = true;
+
+                    if (typeof google !== 'undefined' && google.translate) {
+                        const allCodes = languages.map(l => l.code).join(',');
+                        new google.translate.TranslateElement({
+                            pageLanguage: 'en',
+                            includedLanguages: allCodes,
+                            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                        }, 'google_translate_element');
+
+                        translateReady = true;
+
+                        const pending = window._pendingLang || 'en';
+                        setTimeout(() => {
+                            const select = document.querySelector('.goog-te-combo');
+                            if (select) {
+                                select.value = pending;
+                                select.dispatchEvent(new Event('change'));
+                            }
+                        }, 300);
+                    }
+                };
+
+                function loadGoogleTranslate() {
+                    if (document.querySelector('script[src*="translate.google.com"]')) {
+                        if (typeof google !== 'undefined' && google.translate) {
+                            window.googleTranslateElementInit();
+                        }
+                        return;
+                    }
+                    const script = document.createElement('script');
+                    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+                    script.async = true;
+                    script.defer = true;
+                    document.head.appendChild(script);
+                }
+
+                function toggleDropdown(e) {
+                    e.stopPropagation();
+                    const isOpen = dropdownMenu.classList.toggle('open');
+                    langBtn.classList.toggle('open', isOpen);
+                    langBtn.setAttribute('aria-expanded', isOpen);
+                }
+
+                function closeDropdown() {
+                    dropdownMenu.classList.remove('open');
+                    langBtn.classList.remove('open');
+                    langBtn.setAttribute('aria-expanded', 'false');
+                }
+
+                langBtn.addEventListener('click', toggleDropdown);
+
+                document.addEventListener('click', function(e) {
+                    const wrapper = document.querySelector('.lang-dropdown-wrapper');
+                    if (wrapper && !wrapper.contains(e.target)) {
+                        closeDropdown();
+                    }
+                });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') closeDropdown();
+                });
+
+                renderDropdown();
+                labelText.textContent = 'English';
+
+                if (document.readyState === 'complete') {
+                    loadGoogleTranslate();
+                } else {
+                    window.addEventListener('load', loadGoogleTranslate);
+                }
+
+                setTimeout(function() {
+                    const banner = document.querySelector('.goog-te-banner-frame');
+                    if (banner) banner.style.display = 'none';
+                    if (document.body.style.top && document.body.style.top !== '0px') {
+                        document.body.style.top = '0px';
+                    }
+                }, 1000);
             }
-            
-            // تهيئة نظام اللغة
-            initLanguageSelector();
-            changeLanguage(currentLanguage);
-            
-            // تهيئة القائمة المتنقلة
-            initMobileMenu();
-            
-            // تهيئة التنقل النشط
-            initActiveNavigation();
-            
-            // إضافة حدث لزر تبديل الوضع
-            document.getElementById('themeToggle').addEventListener('click', toggleDarkMode);
-            
-            // تحديث واجهة المستخدم بناءً على حالة تسجيل الدخول
-            updateUserInterface();
-            
-            // عرض المشاركات والإعلانات والمقالات
-            displayPosts();
-            displayBlogPosts();
-            displayAds();
-            
-            // إضافة مستمعي الأحداث للأزرار
-            document.getElementById('joinBtn').addEventListener('click', function() {
-                document.getElementById('posts').scrollIntoView({ behavior: 'smooth' });
-            });
-            
-            document.getElementById('loginBtn').addEventListener('click', login);
-            document.getElementById('registerBtn').addEventListener('click', register);
-            document.getElementById('logoutBtn').addEventListener('click', logout);
-            
-            // إضافة مستمعي الأحداث لتصفية المشاركات
-            const postFilters = document.querySelectorAll('#postFilters .filter-btn');
-            postFilters.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // إزالة النشاط من جميع الأزرار
-                    postFilters.forEach(b => b.classList.remove('active'));
-                    // إضافة النشاط للزر المحدد
-                    this.classList.add('active');
-                    // عرض المشاركات المصفاة
-                    displayPosts(this.dataset.filter);
-                });
-            });
-            
-            // إضافة مستمعي الأحداث لتصفية الإعلانات
-            const adFilters = document.querySelectorAll('#adFilters .filter-btn');
-            adFilters.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // إزالة النشاط من جميع الأزرار
-                    adFilters.forEach(b => b.classList.remove('active'));
-                    // إضافة النشاط للزر المحدد
-                    this.classList.add('active');
-                    // عرض الإعلانات المصفاة
-                    displayAds(this.dataset.filter);
-                });
-            });
-        });
+        })();
     </script>
+
 </body>
 </html>
