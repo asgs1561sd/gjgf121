@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="ltr">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>3ALearning · for English</title>
-    
-    <!-- Preconnect for faster external resource loading -->
+
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-    
-    <!-- Font Awesome 6 - with defer and reduced size -->
+
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'" />
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     </noscript>
-    
+
     <style>
-        /* ----- Critical CSS (inline) ----- */
+        /* ----- Critical CSS ----- */
         :root {
             --color-primary: #0056D2;
             --color-primary-hover: #003d9e;
+            --color-primary-light: #e8f0fe;
             --color-bg: #FFFFFF;
             --color-text: #1F1F1F;
             --color-text-light: #5a5a5a;
             --color-border: #e8e8e8;
             --color-shadow: rgba(0, 0, 0, 0.05);
+            --color-shadow-heavy: rgba(0, 0, 0, 0.12);
+            --color-success: #28a745;
+            --color-error: #dc3545;
+            --color-warning: #f5a623;
             --header-height: 66px;
             --radius: 6px;
-            --transition: 0.2s ease;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --max-width: 1200px;
             --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             --footer-bg: #1a1a1a;
@@ -36,7 +43,13 @@
             --footer-border: #333333;
         }
 
-        /* Prevent selection and zoom */
+        /* Level Colors */
+        .level-a1 { --level-color: #4CAF50; --level-bg: #e8f5e9; }
+        .level-a2 { --level-color: #8BC34A; --level-bg: #f1f8e9; }
+        .level-b1 { --level-color: #FFC107; --level-bg: #fff8e1; }
+        .level-b2 { --level-color: #FF9800; --level-bg: #fff3e0; }
+        .level-c1 { --level-color: #f44336; --level-bg: #ffebee; }
+
         * {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -44,52 +57,36 @@
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        /* Allow selection on input fields for usability */
-        input, textarea, [contenteditable="true"] {
+        input,
+        textarea,
+        [contenteditable="true"] {
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
             user-select: text;
         }
-
-        /* Prevent zoom via keyboard shortcuts (touch) */
         html {
             touch-action: manipulation;
         }
-
         body {
             -webkit-text-size-adjust: 100%;
             -moz-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
             text-size-adjust: 100%;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
             font-family: var(--font-family);
             background: #f5f7fa;
             padding-top: var(--header-height);
             top: 0 !important;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Disable right-click context menu */
-        .app-header, .hero-section, .pricing-section, .app-footer, .mobile-nav {
-            -webkit-touch-callout: none;
-        }
-
+        /* Header */
         .app-header {
             position: fixed;
             top: 0;
@@ -104,7 +101,6 @@
             align-items: center;
             padding: 0 32px;
         }
-
         .header-inner {
             max-width: var(--max-width);
             width: 100%;
@@ -114,7 +110,6 @@
             justify-content: space-between;
             gap: 20px;
         }
-
         .brand-logo {
             display: flex;
             align-items: center;
@@ -126,7 +121,9 @@
             white-space: nowrap;
             flex-shrink: 0;
         }
-
+        .brand-logo span {
+            color: var(--color-primary);
+        }
         .nav-links {
             display: flex;
             align-items: center;
@@ -148,7 +145,6 @@
             color: var(--color-primary);
             border-bottom-color: var(--color-primary);
         }
-
         .search-wrapper {
             flex: 1 1 auto;
             max-width: 440px;
@@ -195,7 +191,6 @@
             background: #ffffff;
             box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.08);
         }
-
         .user-actions {
             display: flex;
             align-items: center;
@@ -213,6 +208,7 @@
             transition: all var(--transition);
             white-space: nowrap;
             background: transparent;
+            cursor: pointer;
         }
         .login-link:hover {
             color: var(--color-primary);
@@ -232,6 +228,8 @@
             white-space: nowrap;
             line-height: 1;
             letter-spacing: 0.2px;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-primary:hover {
             background: var(--color-primary-hover);
@@ -240,7 +238,25 @@
         .btn-primary:active {
             transform: scale(0.97);
         }
-
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--color-border);
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 8px 20px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .btn-outline:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: #f8faff;
+        }
         .hamburger {
             display: none;
             background: transparent;
@@ -258,7 +274,6 @@
             color: var(--color-primary);
             border-color: var(--color-primary);
         }
-
         .mobile-nav {
             display: none;
             flex-direction: column;
@@ -268,7 +283,7 @@
             left: 0;
             width: 100%;
             padding: 24px 32px 32px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
             border-bottom: 1px solid var(--color-border);
             gap: 14px;
             z-index: 999;
@@ -301,6 +316,7 @@
             justify-content: center;
             padding: 12px;
             border-radius: var(--radius);
+            text-align: center;
         }
         .mobile-user-actions .login-link {
             text-align: center;
@@ -309,19 +325,17 @@
             border: 1px solid var(--color-border);
         }
 
-        /* ----- Hero Section ----- */
+        /* Hero */
         .hero-section {
             background: linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 100%);
             padding: 64px 32px 72px;
             text-align: center;
             border-bottom: 1px solid var(--color-border);
         }
-
         .hero-inner {
             max-width: var(--max-width);
             margin: 0 auto;
         }
-
         .hero-badge {
             display: inline-block;
             background: rgba(0, 86, 210, 0.10);
@@ -334,7 +348,6 @@
             text-transform: uppercase;
             margin-bottom: 20px;
         }
-
         .hero-title {
             font-size: 3.2rem;
             font-weight: 800;
@@ -344,12 +357,10 @@
             max-width: 780px;
             margin: 0 auto 16px;
         }
-
         .hero-title .highlight {
             color: var(--color-primary);
             position: relative;
         }
-
         .hero-title .highlight::after {
             content: '';
             position: absolute;
@@ -360,7 +371,6 @@
             background: rgba(0, 86, 210, 0.15);
             border-radius: 4px;
         }
-
         .hero-subtitle {
             font-size: 1.2rem;
             color: var(--color-text-light);
@@ -368,7 +378,6 @@
             margin: 0 auto 32px;
             line-height: 1.6;
         }
-
         .hero-actions {
             display: flex;
             align-items: center;
@@ -376,13 +385,11 @@
             gap: 16px;
             flex-wrap: wrap;
         }
-
         .hero-actions .btn-primary {
             padding: 14px 40px;
             font-size: 1.05rem;
             border-radius: 40px;
         }
-
         .hero-actions .btn-outline-hero {
             background: transparent;
             border: 2px solid var(--color-border);
@@ -396,39 +403,505 @@
             text-decoration: none;
             display: inline-block;
         }
-
         .hero-actions .btn-outline-hero:hover {
             border-color: var(--color-primary);
             color: var(--color-primary);
             background: #f8faff;
         }
-
+        .hero-actions .btn-levels {
+            background: transparent;
+            border: 2px solid var(--color-border);
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 12px 32px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hero-actions .btn-levels:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: #f8faff;
+        }
+        .hero-actions .btn-levels i {
+            font-size: 1rem;
+            transition: transform var(--transition);
+        }
+        .hero-actions .btn-levels:hover i {
+            transform: translateY(2px);
+        }
         .hero-stats {
             display: flex;
             justify-content: center;
             gap: 48px;
             margin-top: 40px;
             padding-top: 32px;
-            border-top: 1px solid rgba(0,0,0,0.06);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
         }
-
         .hero-stats .stat-item {
             text-align: center;
         }
-
         .hero-stats .stat-number {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--color-text);
         }
-
         .hero-stats .stat-label {
             font-size: 0.85rem;
             color: var(--color-text-light);
             margin-top: 2px;
         }
 
-        /* ----- Pricing Section Styles ----- */
+        /* ===== LEVELS MODAL ===== */
+        .levels-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .levels-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .levels-modal {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            max-width: 1100px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 48px 44px 44px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
+            transform: scale(0.96) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .levels-overlay.open .levels-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .levels-modal .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 1.6rem;
+            color: #999;
+            cursor: pointer;
+            transition: color var(--transition);
+            line-height: 1;
+            padding: 4px 8px;
+        }
+        .levels-modal .modal-close:hover {
+            color: var(--color-error);
+        }
+
+        .levels-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .levels-header .icon-circle {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--color-primary-light);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 16px;
+        }
+        .levels-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+        .levels-header p {
+            color: var(--color-text-light);
+            font-size: 1rem;
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .level-card {
+            background: #f8f9fc;
+            border-radius: var(--radius-lg);
+            padding: 20px 16px 18px;
+            border: 2px solid transparent;
+            transition: all var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .level-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+        .level-card .level-badge {
+            display: inline-block;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .level-card .level-code {
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .level-card .level-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 6px;
+        }
+        .level-card .level-desc {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .level-card .level-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 12px 0;
+            text-align: left;
+        }
+        .level-card .level-features li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 3px 0;
+            font-size: 0.75rem;
+            color: var(--color-text);
+        }
+        .level-card .level-features li i {
+            font-size: 0.7rem;
+            width: 14px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .level-card .level-action {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--color-border);
+        }
+        .level-card .level-action .level-link {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap var(--transition);
+        }
+        .level-card .level-action .level-link:hover {
+            gap: 12px;
+        }
+
+        /* Level specific styles */
+        .level-card.level-a1 {
+            border-color: #4CAF50;
+            background: #e8f5e9;
+        }
+        .level-card.level-a1 .level-badge { background: #4CAF50; }
+        .level-card.level-a1 .level-code { color: #4CAF50; }
+        .level-card.level-a1 .level-features li i { color: #4CAF50; }
+
+        .level-card.level-a2 {
+            border-color: #8BC34A;
+            background: #f1f8e9;
+        }
+        .level-card.level-a2 .level-badge { background: #8BC34A; }
+        .level-card.level-a2 .level-code { color: #8BC34A; }
+        .level-card.level-a2 .level-features li i { color: #8BC34A; }
+
+        .level-card.level-b1 {
+            border-color: #FFC107;
+            background: #fff8e1;
+        }
+        .level-card.level-b1 .level-badge { background: #FFC107; }
+        .level-card.level-b1 .level-code { color: #FFC107; }
+        .level-card.level-b1 .level-features li i { color: #FFC107; }
+
+        .level-card.level-b2 {
+            border-color: #FF9800;
+            background: #fff3e0;
+        }
+        .level-card.level-b2 .level-badge { background: #FF9800; }
+        .level-card.level-b2 .level-code { color: #FF9800; }
+        .level-card.level-b2 .level-features li i { color: #FF9800; }
+
+        .level-card.level-c1 {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+        .level-card.level-c1 .level-badge { background: #f44336; }
+        .level-card.level-c1 .level-code { color: #f44336; }
+        .level-card.level-c1 .level-features li i { color: #f44336; }
+
+        /* ===== LEARNING FEATURES SECTION ===== */
+        .learning-features-section {
+            max-width: var(--max-width);
+            margin: 40px auto 40px;
+            padding: 0 32px;
+            text-align: center;
+        }
+        .learning-features-header {
+            margin-bottom: 48px;
+        }
+        .learning-features-header .section-badge {
+            display: inline-block;
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 18px;
+            border-radius: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .learning-features-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+        .learning-features-header p {
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .learning-features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .learning-feature-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 32px 24px 28px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 2px 8px var(--color-shadow);
+            transition: all var(--transition);
+            text-align: center;
+        }
+        .learning-feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--color-primary);
+        }
+        .learning-feature-card .feature-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--color-primary-light);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 16px;
+            transition: all var(--transition);
+        }
+        .learning-feature-card:hover .feature-icon {
+            background: var(--color-primary);
+            color: #ffffff;
+            transform: scale(1.05) rotate(-3deg);
+        }
+        .learning-feature-card .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 6px;
+        }
+        .learning-feature-card .feature-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+        .learning-feature-card .feature-stats {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--color-border);
+        }
+        .learning-feature-card .feature-stats span {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .learning-feature-card .feature-stats span i {
+            color: var(--color-primary);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section {
+            max-width: var(--max-width);
+            margin: 0 auto 60px;
+            padding: 0 32px;
+            text-align: center;
+        }
+        .testimonials-header {
+            margin-bottom: 40px;
+        }
+        .testimonials-header .section-badge {
+            display: inline-block;
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 18px;
+            border-radius: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .testimonials-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        .testimonials-header p {
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+        .testimonial-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 28px 24px 24px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            transition: all var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
+        }
+        .testimonial-card .quote-icon {
+            color: var(--color-primary);
+            font-size: 1.8rem;
+            opacity: 0.15;
+            margin-bottom: 6px;
+        }
+        .testimonial-card .stars {
+            color: #f5b342;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .testimonial-card .quote {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            margin-bottom: 16px;
+            flex: 1;
+            font-style: italic;
+        }
+        .testimonial-card .user-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--color-border);
+        }
+        .testimonial-card .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #eef2f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .testimonial-card .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .testimonial-card .user-info {
+            flex: 1;
+        }
+        .testimonial-card .user-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--color-text);
+        }
+        .testimonial-card .user-role {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+        }
+        .testimonial-card .user-level {
+            font-size: 0.7rem;
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 2px;
+            display: inline-block;
+        }
+
+        /* ===== PRICING ===== */
         .pricing-section {
             max-width: var(--max-width);
             margin: 48px auto 60px;
@@ -436,11 +909,9 @@
             text-align: center;
             flex: 1;
         }
-
         .pricing-header {
             margin-bottom: 48px;
         }
-
         .pricing-header h2 {
             font-size: 2.8rem;
             font-weight: 700;
@@ -448,14 +919,12 @@
             letter-spacing: -0.02em;
             margin-bottom: 12px;
         }
-
         .pricing-header p {
             font-size: 1.2rem;
             color: var(--color-text-light);
             max-width: 600px;
             margin: 0 auto;
         }
-
         .billing-toggle {
             display: inline-flex;
             background: #f0f2f5;
@@ -464,7 +933,6 @@
             margin-bottom: 40px;
             border: 1px solid var(--color-border);
         }
-
         .billing-toggle button {
             background: transparent;
             border: none;
@@ -477,17 +945,14 @@
             transition: all 0.2s ease;
             font-family: var(--font-family);
         }
-
         .billing-toggle button.active {
             background: #ffffff;
             color: var(--color-text);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
-
         .billing-toggle button:first-child.active {
             color: var(--color-primary);
         }
-
         .save-badge {
             display: inline-block;
             background: #e8f0fe;
@@ -499,19 +964,17 @@
             margin-left: 6px;
             letter-spacing: 0.3px;
         }
-
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 32px;
             align-items: stretch;
         }
-
         .pricing-card {
             background: #ffffff;
             border-radius: 12px;
             padding: 40px 32px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             border: 1px solid var(--color-border);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             display: flex;
@@ -519,17 +982,14 @@
             text-align: left;
             position: relative;
         }
-
         .pricing-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
         }
-
         .pricing-card.popular {
             border-color: var(--color-primary);
             box-shadow: 0 8px 24px rgba(0, 86, 210, 0.10);
         }
-
         .pricing-card.popular::before {
             content: "Most Popular";
             position: absolute;
@@ -545,40 +1005,34 @@
             letter-spacing: 0.3px;
             text-transform: uppercase;
         }
-
         .pricing-card .plan-name {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--color-text);
             margin-bottom: 6px;
         }
-
         .pricing-card .plan-desc {
             font-size: 0.95rem;
             color: var(--color-text-light);
             margin-bottom: 20px;
             line-height: 1.5;
         }
-
         .pricing-card .price {
             font-size: 2.6rem;
             font-weight: 700;
             color: var(--color-text);
             margin-bottom: 4px;
         }
-
         .pricing-card .price .currency {
             font-size: 1.4rem;
             font-weight: 600;
             color: var(--color-text-light);
         }
-
         .pricing-card .price .period {
             font-size: 1rem;
             font-weight: 400;
             color: var(--color-text-light);
         }
-
         .pricing-card .price .yearly-price {
             font-size: 1rem;
             font-weight: 400;
@@ -586,25 +1040,21 @@
             display: block;
             margin-top: 2px;
         }
-
         .pricing-card .price .yearly-price .highlight {
             color: var(--color-primary);
             font-weight: 600;
         }
-
         .pricing-card .billing-period {
             font-size: 0.85rem;
             color: var(--color-text-light);
             margin-bottom: 24px;
         }
-
         .pricing-card .features {
             list-style: none;
             padding: 0;
             margin: 0 0 32px 0;
             flex: 1;
         }
-
         .pricing-card .features li {
             display: flex;
             align-items: center;
@@ -614,18 +1064,15 @@
             color: var(--color-text);
             border-bottom: 1px solid #f3f4f6;
         }
-
         .pricing-card .features li:last-child {
             border-bottom: none;
         }
-
         .pricing-card .features i {
             color: var(--color-primary);
             font-size: 0.9rem;
             width: 20px;
             text-align: center;
         }
-
         .pricing-card .btn-primary {
             width: 100%;
             padding: 14px;
@@ -633,7 +1080,6 @@
             text-align: center;
             border-radius: var(--radius);
         }
-
         .pricing-card .btn-outline {
             background: transparent;
             border: 2px solid var(--color-border);
@@ -645,23 +1091,125 @@
             cursor: pointer;
             transition: all var(--transition);
             width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
-
         .pricing-card .btn-outline:hover {
             border-color: var(--color-primary);
             color: var(--color-primary);
             background: #f8faff;
         }
+        .pricing-card .pay-btn {
+            cursor: pointer;
+        }
 
-        /* ----- Footer Styles (Black) ----- */
+        /* ===== PAYMENT METHODS SECTION ===== */
+        .payment-methods-section {
+            max-width: var(--max-width);
+            margin: 0 auto 60px;
+            padding: 0 32px;
+            text-align: center;
+        }
+        .payment-methods-section .payment-header {
+            margin-bottom: 32px;
+        }
+        .payment-methods-section .payment-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        .payment-methods-section .payment-header p {
+            font-size: 1rem;
+            color: var(--color-text-light);
+        }
+        .payment-methods-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 24px 48px;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 32px 40px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 2px 8px var(--color-shadow);
+        }
+        .payment-method-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: transform var(--transition);
+            cursor: default;
+        }
+        .payment-method-item:hover {
+            transform: translateY(-2px);
+        }
+        .payment-method-item i {
+            font-size: 2.8rem;
+            color: #333;
+        }
+        .payment-method-item .fab.fa-cc-visa {
+            color: #1A1F71;
+        }
+        .payment-method-item .fab.fa-cc-mastercard {
+            color: #EB001B;
+        }
+        .payment-method-item .fab.fa-cc-amex {
+            color: #006FCF;
+        }
+        .payment-method-item .fab.fa-cc-paypal {
+            color: #003087;
+        }
+        .payment-method-item .fab.fa-cc-apple-pay {
+            color: #000;
+        }
+        .payment-method-item .fab.fa-google-pay {
+            color: #4285F4;
+        }
+        .payment-method-item .fas.fa-bolt {
+            color: #6772E5;
+        }
+        .payment-methods-grid .payment-method-item .payment-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+        }
+        .trust-badge {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .trust-badge span {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .trust-badge span i {
+            color: var(--color-primary);
+        }
+
+        /* ===== FOOTER ===== */
         .app-footer {
             background: var(--footer-bg);
             color: var(--footer-text);
-            padding: 60px 32px 32px;
+            padding: 100px 32px 50px;
             margin-top: auto;
             border-top: 1px solid var(--footer-border);
         }
-
         .footer-inner {
             max-width: var(--max-width);
             margin: 0 auto;
@@ -669,14 +1217,12 @@
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 40px;
         }
-
         .footer-brand .brand-logo {
             color: #ffffff;
             font-size: 1.5rem;
             margin-bottom: 12px;
             display: inline-block;
         }
-
         .footer-brand p {
             font-size: 0.95rem;
             line-height: 1.6;
@@ -684,13 +1230,11 @@
             max-width: 300px;
             margin-top: 8px;
         }
-
         .footer-social {
             display: flex;
             gap: 16px;
             margin-top: 18px;
         }
-
         .footer-social a {
             display: inline-flex;
             align-items: center;
@@ -704,13 +1248,11 @@
             transition: all 0.25s ease;
             text-decoration: none;
         }
-
         .footer-social a:hover {
             background: var(--color-primary);
             color: #ffffff;
             transform: translateY(-2px);
         }
-
         .footer-column h4 {
             color: var(--footer-heading);
             font-size: 1rem;
@@ -718,27 +1260,22 @@
             margin-bottom: 16px;
             letter-spacing: 0.3px;
         }
-
         .footer-column ul {
             list-style: none;
             padding: 0;
         }
-
         .footer-column ul li {
             margin-bottom: 10px;
         }
-
         .footer-column ul li a {
             color: #b0b0b0;
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.2s ease;
         }
-
         .footer-column ul li a:hover {
             color: #ffffff;
         }
-
         .footer-bottom {
             max-width: var(--max-width);
             margin: 40px auto 0;
@@ -752,27 +1289,43 @@
             font-size: 0.85rem;
             color: #888888;
         }
-
         .footer-bottom-links {
             display: flex;
             gap: 24px;
         }
-
         .footer-bottom-links a {
             color: #888888;
             text-decoration: none;
             transition: color 0.2s ease;
         }
-
         .footer-bottom-links a:hover {
             color: #ffffff;
         }
 
-        /* ----- Responsive ----- */
+        /* ===== RESPONSIVE ===== */
+        @media screen and (max-width: 1024px) {
+            .levels-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .learning-features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media screen and (max-width: 900px) {
-            .app-header { padding: 0 20px; }
-            .nav-links { gap: 18px; }
-            .search-wrapper { max-width: 320px; min-width: 120px; }
+            .app-header {
+                padding: 0 20px;
+            }
+            .nav-links {
+                gap: 18px;
+            }
+            .search-wrapper {
+                max-width: 320px;
+                min-width: 120px;
+            }
             .pricing-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -787,17 +1340,27 @@
                 gap: 28px;
                 flex-wrap: wrap;
             }
+            .payment-methods-grid {
+                padding: 24px 20px;
+                gap: 18px 32px;
+            }
         }
 
         @media screen and (max-width: 768px) {
-            :root { --header-height: 60px; }
-            .app-header { padding: 0 16px; }
+            :root {
+                --header-height: 60px;
+            }
+            .app-header {
+                padding: 0 16px;
+            }
             .nav-links,
             .user-actions .login-link,
             .user-actions .btn-primary {
                 display: none;
             }
-            .hamburger { display: inline-block; }
+            .hamburger {
+                display: inline-block;
+            }
             .search-wrapper {
                 max-width: 200px;
                 min-width: 80px;
@@ -809,9 +1372,13 @@
                 font-size: 0.85rem;
                 padding-left: 34px;
             }
-            .search-icon { left: 12px; font-size: 0.8rem; }
-            .brand-logo { font-size: 1.15rem; }
-
+            .search-icon {
+                left: 12px;
+                font-size: 0.8rem;
+            }
+            .brand-logo {
+                font-size: 1.15rem;
+            }
             .hero-section {
                 padding: 40px 16px 48px;
             }
@@ -825,7 +1392,8 @@
                 padding: 12px 28px;
                 font-size: 0.95rem;
             }
-            .hero-actions .btn-outline-hero {
+            .hero-actions .btn-outline-hero,
+            .hero-actions .btn-levels {
                 padding: 10px 24px;
                 font-size: 0.95rem;
             }
@@ -835,7 +1403,6 @@
             .hero-stats .stat-number {
                 font-size: 1.4rem;
             }
-
             .pricing-section {
                 padding: 0 16px;
                 margin: 32px auto 40px;
@@ -853,7 +1420,7 @@
                 font-size: 0.8rem;
             }
             .app-footer {
-                padding: 40px 20px 24px;
+                padding: 60px 20px 40px;
             }
             .footer-inner {
                 grid-template-columns: 1fr;
@@ -868,10 +1435,97 @@
                 flex-wrap: wrap;
                 gap: 16px;
             }
+            .payment-methods-section {
+                padding: 0 16px;
+                margin: 0 auto 40px;
+            }
+            .payment-methods-section .payment-header h3 {
+                font-size: 1.4rem;
+            }
+            .payment-methods-grid {
+                padding: 20px 16px;
+                gap: 14px 24px;
+            }
+            .payment-method-item i {
+                font-size: 2.2rem;
+            }
+            .trust-badge {
+                gap: 12px;
+            }
+            .trust-badge span {
+                font-size: 0.75rem;
+            }
+            .learning-features-section {
+                padding: 0 16px;
+                margin: 30px auto 30px;
+            }
+            .learning-features-header h2 {
+                font-size: 2rem;
+            }
+            .learning-features-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+            .learning-feature-card {
+                padding: 24px 18px 20px;
+            }
+            .learning-feature-card .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.6rem;
+            }
+
+            .testimonials-section {
+                padding: 0 16px;
+                margin: 0 auto 40px;
+            }
+            .testimonials-header h2 {
+                font-size: 2rem;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                max-width: 440px;
+                margin: 0 auto;
+            }
+
+            .levels-modal {
+                padding: 32px 20px 28px;
+                margin: 12px;
+                border-radius: 16px;
+            }
+            .levels-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .levels-header h2 {
+                font-size: 1.5rem;
+            }
+            .levels-header .icon-circle {
+                width: 60px;
+                height: 60px;
+                font-size: 1.6rem;
+            }
+            .level-card {
+                padding: 16px 12px 14px;
+            }
+            .level-card .level-code {
+                font-size: 1.6rem;
+            }
+            .level-card .level-name {
+                font-size: 0.75rem;
+            }
+            .level-card .level-desc {
+                font-size: 0.7rem;
+            }
+            .level-card .level-features li {
+                font-size: 0.7rem;
+            }
         }
 
         @media screen and (max-width: 480px) {
-            .app-header { padding: 0 12px; }
+            .app-header {
+                padding: 0 12px;
+            }
             .search-wrapper {
                 max-width: 140px;
                 min-width: 60px;
@@ -882,10 +1536,17 @@
                 padding-left: 30px;
                 height: 32px;
             }
-            .search-icon { left: 10px; font-size: 0.75rem; }
-            .brand-logo { font-size: 1rem; }
-            .hamburger { font-size: 1.1rem; padding: 4px 10px; }
-
+            .search-icon {
+                left: 10px;
+                font-size: 0.75rem;
+            }
+            .brand-logo {
+                font-size: 1rem;
+            }
+            .hamburger {
+                font-size: 1.1rem;
+                padding: 4px 10px;
+            }
             .hero-title {
                 font-size: 1.6rem;
             }
@@ -894,15 +1555,16 @@
                 width: 100%;
             }
             .hero-actions .btn-primary,
-            .hero-actions .btn-outline-hero {
+            .hero-actions .btn-outline-hero,
+            .hero-actions .btn-levels {
                 width: 100%;
                 text-align: center;
+                justify-content: center;
             }
             .hero-stats {
                 flex-direction: column;
                 gap: 16px;
             }
-
             .pricing-header h2 {
                 font-size: 1.8rem;
             }
@@ -910,7 +1572,78 @@
                 padding: 28px 20px;
             }
             .app-footer {
-                padding: 32px 16px 20px;
+                padding: 50px 16px 30px;
+            }
+            .payment-methods-grid {
+                padding: 16px 12px;
+                gap: 12px 16px;
+            }
+            .payment-method-item i {
+                font-size: 1.8rem;
+            }
+            .payment-method-item .payment-label {
+                font-size: 0.55rem;
+            }
+            .learning-features-grid {
+                grid-template-columns: 1fr;
+                max-width: 340px;
+                margin: 0 auto;
+            }
+            .learning-features-header h2 {
+                font-size: 1.6rem;
+            }
+            .learning-feature-card {
+                padding: 20px 16px;
+            }
+            .learning-feature-card .feature-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 1.4rem;
+            }
+            .testimonials-header h2 {
+                font-size: 1.6rem;
+            }
+            .testimonial-card {
+                padding: 20px 16px;
+            }
+            .testimonial-card .user-avatar {
+                width: 44px;
+                height: 44px;
+                font-size: 1rem;
+            }
+            .levels-modal {
+                padding: 20px 12px 18px;
+            }
+            .levels-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .levels-header h2 {
+                font-size: 1.2rem;
+            }
+            .levels-header .icon-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+                margin-bottom: 10px;
+            }
+            .level-card {
+                padding: 14px 12px 12px;
+            }
+            .level-card .level-code {
+                font-size: 1.4rem;
+            }
+            .level-card .level-features li {
+                font-size: 0.7rem;
+                padding: 2px 0;
+            }
+            .level-card .level-action .level-link {
+                font-size: 0.75rem;
+            }
+            .levels-modal .modal-close {
+                top: 10px;
+                right: 14px;
+                font-size: 1.3rem;
             }
         }
 
@@ -920,58 +1653,74 @@
             outline: 2px solid var(--color-primary);
             outline-offset: 2px;
         }
+
+        /* إزالة عناصر الدفع */
+        .payment-section,
+        .signup-overlay,
+        .video-modal {
+            display: none !important;
+        }
+
+        /* Scrollbar styling */
+        .levels-modal::-webkit-scrollbar {
+            width: 6px;
+        }
+        .levels-modal::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        .levels-modal::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+        .levels-modal::-webkit-scrollbar-thumb:hover {
+            background: #aaa;
+        }
     </style>
 </head>
 <body>
 
+    <!-- ===== HEADER ===== -->
     <header class="app-header" role="banner">
         <div class="header-inner">
-            <a href="#" class="brand-logo" aria-label="3ALearning homepage">
+            <a href="/" class="brand-logo" aria-label="3ALearning homepage">
                 <span>3ALearning</span>
             </a>
-
             <nav class="nav-links" aria-label="Main navigation">
-                <a href="#">Courses</a>
-                <a href="#">Practice</a>
-                <a href="#">Grammar</a>
-                <a href="#">Test</a>
+                <a href="/courses">Courses</a>
+                <a href="/practice">Practice</a>
+                <a href="/grammar">Grammar</a>
+                <a href="/test">Test</a>
             </nav>
-
             <div class="search-wrapper" role="search">
-                <form class="search-form" action="#" method="get">
+                <form class="search-form" action="/search" method="get">
                     <i class="fas fa-search search-icon" aria-hidden="true"></i>
-                    <input
-                        class="search-input"
-                        type="search"
-                        placeholder="Search lessons..."
-                        aria-label="Search for English lessons or topics"
-                    />
+                    <input class="search-input" type="search" placeholder="Search lessons..." aria-label="Search for English lessons or topics" name="q" />
                 </form>
             </div>
-
             <div class="user-actions">
-                <a href="#" class="login-link">Log In</a>
-                <button class="btn-primary">Try For Free</button>
+                <a href="/login" class="login-link">Log In</a>
+                <a href="/signup" class="btn-primary">Try For Free</a>
             </div>
-
             <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-controls="mobileNav" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
 
+    <!-- ===== MOBILE NAV ===== -->
     <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
-        <a href="#">Courses</a>
-        <a href="#">Practice Tools</a>
-        <a href="#">Grammar &amp; Vocab</a>
-        <a href="#">Placement Test</a>
+        <a href="/courses">Courses</a>
+        <a href="/practice">Practice Tools</a>
+        <a href="/grammar">Grammar &amp; Vocab</a>
+        <a href="/test">Placement Test</a>
         <div class="mobile-user-actions">
-            <a href="#" class="login-link">Log In</a>
-            <button class="btn-primary">Start Free Trial</button>
+            <a href="/login" class="login-link">Log In</a>
+            <a href="/signup" class="btn-primary">Start Free Trial</a>
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- ===== HERO ===== -->
     <section class="hero-section">
         <div class="hero-inner">
             <div class="hero-badge">
@@ -981,20 +1730,23 @@
                 Master English with <br /><span class="highlight">Smart &amp; Interactive</span> Lessons
             </h1>
             <p class="hero-subtitle">
-                Join thousands of learners worldwide. Build vocabulary, master grammar, 
+                Join thousands of learners worldwide. Build vocabulary, master grammar,
                 and speak with confidence — all at your own pace.
             </p>
             <div class="hero-actions">
-                <button class="btn-primary">Start Free Trial <i class="fas fa-arrow-right" style="margin-left:10px;"></i></button>
-                <a href="#" class="btn-outline-hero"><i class="fas fa-play-circle" style="margin-right:8px;"></i> See How It Works</a>
+                <a href="/signup" class="btn-primary">Start Free Trial <i class="fas fa-arrow-right" style="margin-left:10px;"></i></a>
+                <button class="btn-levels" id="levelsBtn">
+                    <i class="fas fa-layer-group"></i> View Levels
+                    <i class="fas fa-chevron-down" style="font-size:0.8rem;"></i>
+                </button>
             </div>
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number">12K+</div>
+                    <div class="stat-number">10K+</div>
                     <div class="stat-label">Active Learners</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">200+</div>
+                    <div class="stat-number">180+</div>
                     <div class="stat-label">Interactive Lessons</div>
                 </div>
                 <div class="stat-item">
@@ -1005,20 +1757,331 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing-section">
+    <!-- ===== LEVELS MODAL ===== -->
+    <div class="levels-overlay" id="levelsOverlay" role="dialog" aria-modal="true" aria-label="Learning levels CEFR">
+        <div class="levels-modal">
+            <button class="modal-close" id="levelsClose" aria-label="Close levels">✕</button>
+
+            <div class="levels-header">
+                <div class="icon-circle">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h2>CEFR English Levels</h2>
+                <p>Find your perfect starting point from A1 to C1</p>
+            </div>
+
+            <div class="levels-grid">
+                <!-- A1 -->
+                <div class="level-card level-a1">
+                    <span class="level-badge">Beginner</span>
+                    <span class="level-code">A1</span>
+                    <div class="level-name">Starter</div>
+                    <div class="level-desc">Can understand and use basic phrases.</div>
+                    <ul class="level-features">
+                        <li><i class="fas fa-check-circle"></i> Greetings &amp; introductions</li>
+                        <li><i class="fas fa-check-circle"></i> Basic vocabulary (500 words)</li>
+                        <li><i class="fas fa-check-circle"></i> Simple sentence structures</li>
+                        <li><i class="fas fa-check-circle"></i> Present simple tense</li>
+                    </ul>
+                    <div class="level-action">
+                        <a href="/signup?level=a1" class="level-link">
+                            Start Learning <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- A2 -->
+                <div class="level-card level-a2">
+                    <span class="level-badge">Elementary</span>
+                    <span class="level-code">A2</span>
+                    <div class="level-name">Waystage</div>
+                    <div class="level-desc">Can communicate in simple everyday situations.</div>
+                    <ul class="level-features">
+                        <li><i class="fas fa-check-circle"></i> Daily conversations</li>
+                        <li><i class="fas fa-check-circle"></i> Past &amp; future tenses</li>
+                        <li><i class="fas fa-check-circle"></i> Basic writing skills</li>
+                        <li><i class="fas fa-check-circle"></i> 1000+ vocabulary words</li>
+                    </ul>
+                    <div class="level-action">
+                        <a href="/signup?level=a2" class="level-link">
+                            Start Learning <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- B1 -->
+                <div class="level-card level-b1">
+                    <span class="level-badge" style="color:#333;">Intermediate</span>
+                    <span class="level-code">B1</span>
+                    <div class="level-name">Threshold</div>
+                    <div class="level-desc">Can handle most travel and work situations.</div>
+                    <ul class="level-features">
+                        <li><i class="fas fa-check-circle"></i> Complex conversations</li>
+                        <li><i class="fas fa-check-circle"></i> Modal verbs &amp; conditionals</li>
+                        <li><i class="fas fa-check-circle"></i> Reading comprehension</li>
+                        <li><i class="fas fa-check-circle"></i> 2000+ vocabulary words</li>
+                    </ul>
+                    <div class="level-action">
+                        <a href="/signup?level=b1" class="level-link">
+                            Start Learning <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- B2 -->
+                <div class="level-card level-b2">
+                    <span class="level-badge" style="color:#333;">Upper-Intermediate</span>
+                    <span class="level-code">B2</span>
+                    <div class="level-name">Vantage</div>
+                    <div class="level-desc">Can interact with native speakers fluently.</div>
+                    <ul class="level-features">
+                        <li><i class="fas fa-check-circle"></i> Fluent conversation</li>
+                        <li><i class="fas fa-check-circle"></i> Passive voice &amp; reported speech</li>
+                        <li><i class="fas fa-check-circle"></i> Essay writing</li>
+                        <li><i class="fas fa-check-circle"></i> 3000+ vocabulary words</li>
+                    </ul>
+                    <div class="level-action">
+                        <a href="/signup?level=b2" class="level-link">
+                            Start Learning <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- C1 -->
+                <div class="level-card level-c1">
+                    <span class="level-badge">Advanced</span>
+                    <span class="level-code">C1</span>
+                    <div class="level-name">Effective Operational</div>
+                    <div class="level-desc">Can use language flexibly for academic/professional purposes.</div>
+                    <ul class="level-features">
+                        <li><i class="fas fa-check-circle"></i> Academic &amp; business English</li>
+                        <li><i class="fas fa-check-circle"></i> Advanced grammar &amp; style</li>
+                        <li><i class="fas fa-check-circle"></i> IELTS/TOEFL preparation</li>
+                        <li><i class="fas fa-check-circle"></i> 4000+ vocabulary words</li>
+                    </ul>
+                    <div class="level-action">
+                        <a href="/signup?level=c1" class="level-link">
+                            Start Learning <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--color-border);">
+                <p style="color: var(--color-text-light); font-size: 0.9rem;">
+                    <i class="fas fa-question-circle" style="color: var(--color-primary);"></i>
+                    Not sure which level is right for you?
+                    <a href="/placement-test" style="font-weight: 600;">Take our free placement test</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== LEARNING FEATURES SECTION ===== -->
+    <section class="learning-features-section" aria-label="Learning features">
+        <div class="learning-features-header">
+            <span class="section-badge"><i class="fas fa-rocket" style="margin-right:6px;"></i> Learn by Doing</span>
+            <h2>Practice. Watch. Interact. <br />Learn English the Modern Way</h2>
+            <p>
+                No more boring textbooks! Learn English through real-world practice,
+                engaging videos, and interactive exercises that make learning fun and effective.
+            </p>
+        </div>
+
+        <div class="learning-features-grid">
+            <!-- 1. Practice -->
+            <div class="learning-feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-microphone-alt"></i>
+                </div>
+                <div class="feature-title">Speaking Practice</div>
+                <div class="feature-desc">
+                    Practice real conversations with AI-powered voice recognition.
+                    Get instant feedback on your pronunciation and fluency.
+                </div>
+                <div class="feature-stats">
+                    <span><i class="fas fa-check-circle"></i> 50+ scenarios</span>
+                    <span><i class="fas fa-star"></i> 4.8 rating</span>
+                </div>
+            </div>
+
+            <!-- 2. Videos -->
+            <div class="learning-feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="feature-title">Video Lessons</div>
+                <div class="feature-desc">
+                    Watch expert-led video lessons with subtitles and transcripts.
+                    Learn naturally through real-life conversations and stories.
+                </div>
+                <div class="feature-stats">
+                    <span><i class="fas fa-play-circle"></i> 200+ videos</span>
+                    <span><i class="fas fa-clock"></i> 5-15 min</span>
+                </div>
+            </div>
+
+            <!-- 3. Interactive -->
+            <div class="learning-feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-pointer"></i>
+                </div>
+                <div class="feature-title">Interactive Exercises</div>
+                <div class="feature-desc">
+                    Drag, drop, match, and type your way to mastery.
+                    Engaging activities that make learning feel like a game.
+                </div>
+                <div class="feature-stats">
+                    <span><i class="fas fa-puzzle-piece"></i> 500+ activities</span>
+                    <span><i class="fas fa-trophy"></i> 12 levels</span>
+                </div>
+            </div>
+
+            <!-- 4. Visual Learning -->
+            <div class="learning-feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-images"></i>
+                </div>
+                <div class="feature-title">Visual &amp; Audio</div>
+                <div class="feature-desc">
+                    Learn with high-quality images, infographics, and audio files.
+                    Perfect for visual and auditory learners.
+                </div>
+                <div class="feature-stats">
+                    <span><i class="fas fa-image"></i> 1000+ visuals</span>
+                    <span><i class="fas fa-headphones"></i> HD audio</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS SECTION ===== -->
+    <section class="testimonials-section" aria-label="Learner testimonials">
+        <div class="testimonials-header">
+            <span class="section-badge"><i class="fas fa-star" style="margin-right:6px;"></i> Real Stories</span>
+            <h2>What Our Learners Say</h2>
+            <p>Real stories from real students who transformed their English with 3ALearning</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-icon">
+                    <i class="fas fa-quote-right"></i>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="quote">
+                    An amazing experience! I learned so much in a short time. The interactive lessons helped me improve my skills significantly.
+                </div>
+                <div class="user-row">
+                    <div class="user-avatar">
+                        <img src="https://i.pravatar.cc/100?img=11" alt="Photo of Ahmed" loading="lazy" />
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">Ahmed Mohamed</div>
+                        <div class="user-role">Software Engineer</div>
+                        <span class="user-level">Level B2</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="quote-icon">
+                    <i class="fas fa-quote-right"></i>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="quote">
+                    I loved the fun and organized learning style. I now speak English more fluently and feel much more confident in conversations.
+                </div>
+                <div class="user-row">
+                    <div class="user-avatar">
+                        <img src="https://i.pravatar.cc/100?img=5" alt="Photo of Sarah" loading="lazy" />
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">Sarah Abdullah</div>
+                        <div class="user-role">University Student</div>
+                        <span class="user-level">Level B1</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="quote-icon">
+                    <i class="fas fa-quote-right"></i>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="quote">
+                    The best platform I've ever used to learn English. The interactive exercises and instant feedback made a huge difference.
+                </div>
+                <div class="user-row">
+                    <div class="user-avatar">
+                        <img src="https://i.pravatar.cc/100?img=12" alt="Photo of Omar" loading="lazy" />
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">Omar Khalid</div>
+                        <div class="user-role">Entrepreneur</div>
+                        <span class="user-level">Level C1</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="quote-icon">
+                    <i class="fas fa-quote-right"></i>
+                </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="quote">
+                    I went from A1 to B2 in just 4 months! The structured lessons and practice exercises are incredible.
+                </div>
+                <div class="user-row">
+                    <div class="user-avatar">
+                        <img src="https://i.pravatar.cc/100?img=20" alt="Photo of Layla" loading="lazy" />
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">Layla Hassan</div>
+                        <div class="user-role">Marketing Manager</div>
+                        <span class="user-level">Level B2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRICING SECTION ===== -->
+    <section class="pricing-section" id="pricingSection">
         <div class="pricing-header">
             <h2>Choose Your Plan</h2>
             <p>Start learning English today with a plan that fits your goals and budget.</p>
         </div>
-
         <div class="billing-toggle" role="group" aria-label="Billing period">
             <button class="active" data-period="monthly">Monthly</button>
             <button data-period="yearly">Yearly <span class="save-badge">Save 67%</span></button>
         </div>
-
         <div class="pricing-grid" id="pricingGrid">
-            <div class="pricing-card" data-plan="starter">
+            <!-- Starter -->
+            <div class="pricing-card" data-plan="starter" data-price-monthly="2" data-price-yearly="20" data-name="Starter">
                 <div class="plan-name">Starter</div>
                 <div class="plan-desc">Perfect for beginners exploring English.</div>
                 <div class="price">
@@ -1033,10 +2096,11 @@
                     <li><i class="fas fa-check-circle"></i> Grammar fundamentals</li>
                     <li><i class="fas fa-check-circle"></i> Email support</li>
                 </ul>
-                <button class="btn-outline">Get Started</button>
+                <a href="/signup?plan=starter" class="btn-outline pay-btn">Get Started</a>
             </div>
 
-            <div class="pricing-card popular" data-plan="pro">
+            <!-- Pro -->
+            <div class="pricing-card popular" data-plan="pro" data-price-monthly="4" data-price-yearly="40" data-name="Pro">
                 <div class="plan-name">Pro</div>
                 <div class="plan-desc">For learners who want to make real progress.</div>
                 <div class="price">
@@ -1052,10 +2116,11 @@
                     <li><i class="fas fa-check-circle"></i> Personalized study plan</li>
                     <li><i class="fas fa-check-circle"></i> Priority email &amp; chat support</li>
                 </ul>
-                <button class="btn-primary">Start Free Trial</button>
+                <a href="/signup?plan=pro" class="btn-primary pay-btn">Start Free Trial</a>
             </div>
 
-            <div class="pricing-card" data-plan="premium">
+            <!-- Premium -->
+            <div class="pricing-card" data-plan="premium" data-price-monthly="7" data-price-yearly="70" data-name="Premium">
                 <div class="plan-name">Premium</div>
                 <div class="plan-desc">For serious learners aiming for fluency.</div>
                 <div class="price">
@@ -1071,16 +2136,59 @@
                     <li><i class="fas fa-check-circle"></i> IELTS/TOEFL preparation</li>
                     <li><i class="fas fa-check-circle"></i> 24/7 priority support</li>
                 </ul>
-                <button class="btn-outline">Get Started</button>
+                <a href="/signup?plan=premium" class="btn-outline pay-btn">Get Started</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== PAYMENT METHODS SECTION ===== -->
+    <section class="payment-methods-section" aria-label="Payment methods">
+        <div class="payment-header">
+            <h3>Secure Payment Methods</h3>
+            <p>We accept all major payment methods. Your information is safe and encrypted.</p>
+        </div>
+        <div class="payment-methods-grid">
+            <div class="payment-method-item">
+                <i class="fab fa-cc-visa"></i>
+                <span class="payment-label">Visa</span>
+            </div>
+            <div class="payment-method-item">
+                <i class="fab fa-cc-mastercard"></i>
+                <span class="payment-label">MasterCard</span>
+            </div>
+            <div class="payment-method-item">
+                <i class="fab fa-cc-amex"></i>
+                <span class="payment-label">Amex</span>
+            </div>
+            <div class="payment-method-item">
+                <i class="fab fa-cc-paypal"></i>
+                <span class="payment-label">PayPal</span>
+            </div>
+            <div class="payment-method-item">
+                <i class="fab fa-cc-apple-pay"></i>
+                <span class="payment-label">Apple Pay</span>
+            </div>
+            <div class="payment-method-item">
+                <i class="fab fa-google-pay"></i>
+                <span class="payment-label">Google Pay</span>
+            </div>
+            <div class="payment-method-item">
+                <i class="fas fa-bolt" style="color: #6772E5;"></i>
+                <span class="payment-label">Stripe</span>
+            </div>
+        </div>
+        <div class="trust-badge">
+            <span><i class="fas fa-shield-alt"></i> 256-bit SSL Encryption</span>
+            <span><i class="fas fa-check-circle"></i> PCI Compliant</span>
+            <span><i class="fas fa-clock"></i> 24/7 Support</span>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
     <footer class="app-footer" role="contentinfo">
         <div class="footer-inner">
             <div class="footer-brand">
-                <a href="#" class="brand-logo" style="color:#ffffff;">3ALearning</a>
+                <a href="/" class="brand-logo" style="color:#ffffff;">3ALearning</a>
                 <p>Learn English the smart way. Interactive lessons, personalized practice, and real progress — all in one place.</p>
                 <div class="footer-social">
                     <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -1090,45 +2198,41 @@
                     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-
             <div class="footer-column">
                 <h4>Learning</h4>
                 <ul>
-                    <li><a href="#">Courses</a></li>
-                    <li><a href="#">Grammar Guide</a></li>
-                    <li><a href="#">Vocabulary</a></li>
-                    <li><a href="#">Practice Tests</a></li>
+                    <li><a href="/courses">Courses</a></li>
+                    <li><a href="/grammar">Grammar Guide</a></li>
+                    <li><a href="/vocabulary">Vocabulary</a></li>
+                    <li><a href="/practice">Practice Tests</a></li>
                 </ul>
             </div>
-
             <div class="footer-column">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contact">Contact</a></li>
                 </ul>
             </div>
-
             <div class="footer-column">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Community</a></li>
+                    <li><a href="/help">Help Center</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/community">Community</a></li>
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
             <span>&copy; 2026 3ALearning. All rights reserved.</span>
             <div class="footer-bottom-links">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-                <a href="#">Cookies</a>
-                <a href="#">Sitemap</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+                <a href="/cookies">Cookies</a>
+                <a href="/sitemap">Sitemap</a>
             </div>
         </div>
     </footer>
@@ -1142,78 +2246,31 @@
             }
 
             function init() {
-                // Disable right-click context menu on the whole page
+                // منع السياق والقوائم
                 document.addEventListener('contextmenu', function(e) {
                     e.preventDefault();
                     return false;
                 });
-
-                // Disable keyboard shortcuts for copy/paste/select all
                 document.addEventListener('keydown', function(e) {
-                    // Ctrl+C, Ctrl+V, Ctrl+A, Ctrl+U (view source), Ctrl+S (save)
-                    if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'a' || e.key === 'u' || e.key === 's')) {
+                    if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'a' || e.key === 'u' || e.key ===
+                            's')) {
                         e.preventDefault();
                         return false;
                     }
-                    // F12 (DevTools)
                     if (e.key === 'F12') {
                         e.preventDefault();
                         return false;
                     }
-                    // Ctrl+Shift+I (DevTools), Ctrl+Shift+J (Console), Ctrl+Shift+C (Inspector)
                     if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
                         e.preventDefault();
                         return false;
                     }
+                    if (e.key === 'Escape') {
+                        closeLevels();
+                    }
                 });
 
-                // Billing Toggle Logic
-                const toggleBtns = document.querySelectorAll('.billing-toggle button');
-                const pricingCards = document.querySelectorAll('.pricing-card');
-                
-                const prices = {
-                    starter: { monthly: 2, yearly: 20 },
-                    pro: { monthly: 4, yearly: 40 },
-                    premium: { monthly: 7, yearly: 70 }
-                };
-
-                function updatePrices(period) {
-                    toggleBtns.forEach(btn => {
-                        btn.classList.toggle('active', btn.dataset.period === period);
-                    });
-
-                    pricingCards.forEach(card => {
-                        const plan = card.dataset.plan;
-                        const priceData = prices[plan];
-                        if (!priceData) return;
-
-                        const amountEl = card.querySelector('.amount');
-                        const periodEl = card.querySelector('.period');
-                        const yearlyPriceEl = card.querySelector('.yearly-price');
-                        const billingPeriodEl = card.querySelector('.billing-period');
-
-                        if (period === 'monthly') {
-                            amountEl.textContent = priceData.monthly;
-                            periodEl.textContent = '/mo';
-                            yearlyPriceEl.style.display = 'block';
-                            billingPeriodEl.textContent = 'Billed monthly';
-                            yearlyPriceEl.innerHTML = `or <span class="highlight">$${priceData.yearly}</span> / year`;
-                        } else {
-                            amountEl.textContent = priceData.yearly;
-                            periodEl.textContent = '/year';
-                            yearlyPriceEl.style.display = 'none';
-                            billingPeriodEl.textContent = 'Billed annually';
-                        }
-                    });
-                }
-
-                toggleBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        updatePrices(this.dataset.period);
-                    });
-                });
-
-                // Mobile Hamburger
+                // ===== HAMBURGER =====
                 const hamburger = document.getElementById('hamburgerBtn');
                 const mobileNav = document.getElementById('mobileNav');
 
@@ -1224,6 +2281,7 @@
                         const icon = hamburger.querySelector('i');
                         icon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
                     }
+
                     hamburger.addEventListener('click', toggleMobile);
 
                     mobileNav.querySelectorAll('a, button').forEach(el => {
@@ -1247,6 +2305,87 @@
                         }
                     });
                 }
+
+                // ===== LEVELS MODAL =====
+                const levelsOverlay = document.getElementById('levelsOverlay');
+                const levelsBtn = document.getElementById('levelsBtn');
+                const levelsClose = document.getElementById('levelsClose');
+
+                function openLevels() {
+                    levelsOverlay.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function closeLevels() {
+                    levelsOverlay.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+
+                if (levelsBtn) {
+                    levelsBtn.addEventListener('click', openLevels);
+                }
+                if (levelsClose) {
+                    levelsClose.addEventListener('click', closeLevels);
+                }
+                if (levelsOverlay) {
+                    levelsOverlay.addEventListener('click', function(e) {
+                        if (e.target === levelsOverlay) {
+                            closeLevels();
+                        }
+                    });
+                }
+
+                // ===== PRICING TOGGLE =====
+                const toggleBtns = document.querySelectorAll('.billing-toggle button');
+                const planData = {
+                    starter: { monthly: 2, yearly: 20 },
+                    pro: { monthly: 4, yearly: 40 },
+                    premium: { monthly: 7, yearly: 70 }
+                };
+                let currentPeriod = 'monthly';
+
+                function updatePricingCards(period) {
+                    currentPeriod = period;
+                    toggleBtns.forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.period === period);
+                    });
+
+                    document.querySelectorAll('.pricing-card').forEach(card => {
+                        const plan = card.dataset.plan;
+                        const data = planData[plan];
+                        if (!data) return;
+                        const amountEl = card.querySelector('.amount');
+                        const periodEl = card.querySelector('.period');
+                        const yearlyPriceEl = card.querySelector('.yearly-price');
+                        const billingPeriodEl = card.querySelector('.billing-period');
+
+                        if (period === 'monthly') {
+                            amountEl.textContent = data.monthly;
+                            periodEl.textContent = '/mo';
+                            yearlyPriceEl.style.display = 'block';
+                            billingPeriodEl.textContent = 'Billed monthly';
+                            yearlyPriceEl.innerHTML = `or <span class="highlight">$${data.yearly}</span> / year`;
+                        } else {
+                            amountEl.textContent = data.yearly;
+                            periodEl.textContent = '/year';
+                            yearlyPriceEl.style.display = 'none';
+                            billingPeriodEl.textContent = 'Billed annually';
+                        }
+                    });
+                }
+
+                toggleBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        updatePricingCards(this.dataset.period);
+                    });
+                });
+
+                // ===== LEVEL CARD LINKS =====
+                document.querySelectorAll('.level-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        setTimeout(closeLevels, 200);
+                    });
+                });
             }
         })();
     </script>
